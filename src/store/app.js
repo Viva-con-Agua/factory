@@ -1,0 +1,75 @@
+import api from './api.js'
+
+const app = {
+
+    namespaced: true,
+    state: () => ({
+        list: null,
+        create: {
+            app_name: '',
+            redirect_url: '',
+            logout_url: '',
+            restriction: [],
+        },
+        current: null
+    }),
+    mutations: {
+        create (state, value) {
+            state.create = value
+        },
+        current (state, value) {
+            state.current = value
+        },
+        list (state, value) {
+            state.list = value
+        }
+    },
+    getters:{
+        list (state) {
+            return state.list
+        },
+        current (state) {
+            return state.current
+        }
+    },
+    actions: {
+        async add ({dispatch}) {
+            await dispatch({type: 'create'})
+            await dispatch({type: 'list'})
+        },
+        async update( {dispatch}) {
+            await dispatch({type: 'updateReq'})
+            await dispatch({type: 'list'})
+        },
+
+        create({commit, state}) {
+            return new Promise((resolve, reject) => {
+               api.access.post('/v1/app', state.create)
+                    .then((response) => {commit('current', response.data), resolve()})
+                    .catch(error => {
+                        reject(error)
+                    })
+            }) 
+        },
+        updateReq({commit, state}) {
+            return new Promise((resolve, reject) => {
+               api.access.put('/v1/app', state.current)
+                    .then((response) => {commit('current', response.data), resolve()})
+                    .catch(error => {
+                        reject(error)
+                    })
+            }) 
+        },
+        list({commit}) {
+            return new Promise((resolve, reject) => {
+                api.access.get('/v1/app')
+                    .then((response) => {commit('list', response.data), resolve()})
+                    .catch((error) => {
+                        reject(error)
+                    })
+            })
+        } 
+    }
+    
+}
+export default app
