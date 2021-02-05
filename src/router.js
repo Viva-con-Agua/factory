@@ -23,6 +23,11 @@ const routes = [
         props: route => ({ code: route.query.code })
     },
     {
+        path: '/logout',
+        name: 'Logout',
+        component: loadView('Logout'),
+    },
+    {
         path: '/redirect', name: 'Redirect', component: loadView('Redirect')
     },
     {

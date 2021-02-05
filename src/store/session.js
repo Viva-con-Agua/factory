@@ -1,14 +1,14 @@
 import api from './api.js'
 //import createPersistedState from "vuex-persistedstate";
-const token = {
+const session = {
     namespaced: true,
     state: () => ({
-        test: "Das ist ein Test",
+        user: null,
         error: ""
     }),
     mutations: {
-        test (state, value) {
-            state.test = value
+        user (state, value) {
+            state.user = value
         },
         error (state, value) {
             state.error = value
@@ -18,8 +18,8 @@ const token = {
         }
     },
     getters: {
-        test(state) {
-            return state.test
+        user(state) {
+            return state.user
         },
         session() {
             if (localStorage.getItem("access") === null ) {
@@ -45,11 +45,22 @@ const token = {
 
         get({commit}, code) {
             return new Promise((resolve, reject) => {
-                api.base.get('/token/code?code=' + code.code)
+                api.base.get('/v1/auth/login/token?code=' + code.code)
                     .then(response => {
-
-                        localStorage.setItem('access', response.data.access_token)
-                        localStorage.setItem('refresh', response.data.refresh_token)
+                    api.asyncLocalStorage.setItem('access', response.data.access_token).then(function () {
+                        var token = response.data.access_token
+                        var user = api.parseJwt(token).user
+                        commit("user", user)
+                        console.log(user)
+                        return api.asyncLocalStorage.getItem('access')
+                    }).then(function () {
+                        console.log('Value has been set to:');
+                    });
+                    api.asyncLocalStorage.setItem('refresh', response.data.refresh_token).then(function () {
+                        return api.asyncLocalStorage.getItem('refresh');
+                    }).then(function () {
+                        console.log('Value has been set to:');
+                    });
                         resolve()
                     })
                     .catch(error => {
@@ -75,5 +86,5 @@ const token = {
         }
     }
 }
-export default token
+export default session
 

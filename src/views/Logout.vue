@@ -3,7 +3,7 @@
 </template>
 <script>
 export default {
-    name: 'Login',
+    name: 'Logout',
     props: {
         code: {
             type: String,
@@ -11,10 +11,7 @@ export default {
         }
     },
     created () {
-        this.$store.dispatch({type: 'session/get', code: this.code})
-            .then(() => {
-                this.$router.push({name: 'Root'})
-            })
+        this.$store.commit('session/logout')
 
     }
 }

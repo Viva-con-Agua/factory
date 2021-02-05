@@ -44,7 +44,7 @@ const app = {
 
         create({commit, state}) {
             return new Promise((resolve, reject) => {
-               api.access.post('/v1/app', state.create)
+               api.access.post('/v1/apps', state.create)
                     .then((response) => {commit('current', response.data), resolve()})
                     .catch(error => {
                         reject(error)
@@ -53,7 +53,7 @@ const app = {
         },
         updateReq({commit, state}) {
             return new Promise((resolve, reject) => {
-               api.access.put('/v1/app', state.current)
+               api.access.put('/v1/apps', state.current)
                     .then((response) => {commit('current', response.data), resolve()})
                     .catch(error => {
                         reject(error)
@@ -62,7 +62,7 @@ const app = {
         },
         list({commit}) {
             return new Promise((resolve, reject) => {
-                api.access.get('/v1/app')
+                api.access.get('/v1/apps')
                     .then((response) => {commit('list', response.data), resolve()})
                     .catch((error) => {
                         reject(error)
