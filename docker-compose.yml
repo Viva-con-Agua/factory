@@ -1,0 +1,10 @@
+version: '3'
+
+services:
+    factory:
+        image: vivaconagua/factory:latest
+        build: .
+        restart: always
+        env_file:
+            - .env
+

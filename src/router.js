@@ -16,6 +16,29 @@ const routes = [
 
     },
     {
+        path: '/campaign',
+        name: 'Campaign',
+        component: loadView('CampaignPage'),
+        meta: {requiresAuth: true}
+
+    },
+    {
+        path: '/emails',
+        name: 'EmailPage',
+        component: loadView('EmailPage'),
+        meta: {requiresAuth: true}
+
+    },
+
+    {
+        path: '/overview',
+        name: 'Overview',
+        component: loadView('Overview'),
+        meta: {requiresAuth: true}
+
+    },
+
+    {
         path: '/login',
         name: 'Login',
         component: loadView('Login'),
@@ -27,11 +50,12 @@ const routes = [
         name: 'Logout',
         component: loadView('Logout'),
     },
+
     {
         path: '/redirect', name: 'Redirect', component: loadView('Redirect')
     },
     {
-        path:'/', name:'Root', redirect: { name: 'Applications'}
+        path:'/', name:'Root', redirect: { name: 'Overview'}
     },
 
 ]

@@ -1,15 +1,15 @@
 import api from './api.js'
 
-const app = {
-
-    namespaced: true,
+const campaign = {
+    namespaced: true, 
     state: () => ({
         list: null,
         create: {
-            app_name: '',
-            redirect_url: '',
-            logout_url: '',
-            restriction: [],
+            crm_id: 0,
+            name: "",
+            description:"",
+            start_time:0,
+            end_time: 0,
         },
         current: null
     }),
@@ -17,12 +17,22 @@ const app = {
         create (state, value) {
             state.create = value
         },
+        crm_id (state, value) {
+            state.create.crm_id = Number.parseInt(value)
+        },
         current (state, value) {
             state.current = value
         },
         list (state, value) {
             state.list = value
+        },
+        start_time (state, value) {
+            state.create.start_time = value
+        },
+        end_time (state, value) {
+            state.create.end_time = value
         }
+
     },
     getters:{
         list (state) {
@@ -41,10 +51,9 @@ const app = {
             await dispatch({type: 'updateReq'})
             await dispatch({type: 'list'})
         },
-
         create({commit, state}) {
             return new Promise((resolve, reject) => {
-               api.access.post('/v1/apps', state.create)
+               api.access.post('/v1/moves/campaign', state.create)
                     .then((response) => {commit('current', response.data.payload), resolve()})
                     .catch(error => {
                         reject(error)
@@ -53,7 +62,7 @@ const app = {
         },
         updateReq({commit, state}) {
             return new Promise((resolve, reject) => {
-               api.access.put('/v1/apps', state.current)
+               api.access.put('/v1/moves/campaign', state.current)
                     .then((response) => {commit('current', response.data.payload), resolve()})
                     .catch(error => {
                         reject(error)
@@ -62,7 +71,7 @@ const app = {
         },
         list({commit}) {
             return new Promise((resolve, reject) => {
-                api.access.get('/v1/apps')
+                api.access.get('/v1/moves/campaign')
                     .then((response) => {commit('list', response.data.payload), resolve()})
                     .catch((error) => {
                         reject(error)
@@ -70,6 +79,8 @@ const app = {
             })
         } 
     }
-    
+
+
+
 }
-export default app
+export default campaign

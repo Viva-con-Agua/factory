@@ -1,5 +1,10 @@
 <template>
   <div id="app">
+      <ul>
+        <li><router-link :to="{ name: 'Applications' }">Apps</router-link></li>
+        <li><router-link :to="{ name: 'EmailPage' }">Email</router-link></li>
+        <li><router-link :to="{ name: 'Campaign'  }">Campaign</router-link></li>
+      </ul>
       <router-view/>
   </div>
 </template>
