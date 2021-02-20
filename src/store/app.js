@@ -62,7 +62,7 @@ const app = {
         },
         list({commit}) {
             return new Promise((resolve, reject) => {
-                api.access.get('/v1/apps')
+                api.base.get('/v1/apps')
                     .then((response) => {commit('list', response.data.payload), resolve()})
                     .catch((error) => {
                         reject(error)

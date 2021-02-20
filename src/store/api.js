@@ -4,9 +4,10 @@ import store from './index.js'
 const access = axios.create({
     baseURL: process.env.VUE_APP_BACKEND_URL,
     headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('access'),
+        //'Authorization': 'Bearer ' + localStorage.getItem('access'),
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 })
 access.interceptors.request.use(
     function (config) {
@@ -47,14 +48,16 @@ const refresh = axios.create({
     headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('refresh'),
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 
 })
 const base = axios.create({
     baseURL: process.env.VUE_APP_BACKEND_URL,
     headers: {
         'Content-Type': 'application/json'
-    }
+    },
+    withCredentials: true
 })
 
 const asyncLocalStorage = {
