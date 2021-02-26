@@ -1,78 +1,43 @@
 import axios from 'axios'
-import store from './index.js'
+//import store from './index.js'
 
-const access = axios.create({
+var call = axios.create({
     baseURL: process.env.VUE_APP_BACKEND_URL,
     headers: {
-        //'Authorization': 'Bearer ' + localStorage.getItem('access'),
         'Content-Type': 'application/json'
     },
     withCredentials: true
 })
-access.interceptors.request.use(
-    function (config) {
-        var payload = parseJwt(localStorage.getItem('access'))
-        var now = new Date().getTime()
-        console.log(payload)
-        if (now / 1000 <= payload.exp) {
-            return config
-        } else {
-            refresh.get("/v1/auth/refresh")
-                .then( response => {
-                    asyncLocalStorage.setItem('access', response.data.access_token).then(function () {
-                        var user = parseJwt(response.data.access_token).user
-                        store.commit("session/user", user)
-                        return asyncLocalStorage.getItem('access')
-                    }).then(function () {
-                    });
-                    asyncLocalStorage.setItem('refresh', response.data.refresh_token).then(function () {
-                        return asyncLocalStorage.getItem('mykey');
-                    }).then(function () {
-                    });
-                })
-                .catch(error => {
-                    console.log(error)
-                })
-                .finally(()=> {
-                    return config
-                })
+call.interceptors.response.use((response) => {
+    return response;
+    }, (error) => {
+        if (error.response.status !== 401 && (error.response.status !== 400 && error.response.data.message !== 'missing or malformed jwt')) {
+            return new Promise((resolve, reject) => {
+                console.log("first if", error.response.status, error.response.data.message)
+                reject(error)
+            });
         }
-        //return config
-    }, function(error) {
-        return Promise.reject(error)   
+        if (error.config.url == '/v1/auth/refresh' ) {
+            return new Promise((resolve, reject) => {
+                reject(error);
+            });
+        }
+        return new Promise((resolve, reject) => 
+            call.get('/v1/auth/refresh')
+                .then((response) => {
+                    if (response.status === 200) {
+                        const config = error.config;
+                        axios.request(config).then(response => {
+                            resolve(response);
+                        }).catch((error) => {
+                            reject(error)
+                        })
+                    }
+                }).catch((error) => {
+                    reject(error)
+                })
+        )
     })
-
-
-const refresh = axios.create({
-    baseURL: process.env.VUE_APP_BACKEND_URL,
-    headers: {
-        'Authorization': 'Bearer ' + localStorage.getItem('refresh'),
-        'Content-Type': 'application/json'
-    },
-    withCredentials: true
-
-})
-const base = axios.create({
-    baseURL: process.env.VUE_APP_BACKEND_URL,
-    headers: {
-        'Content-Type': 'application/json'
-    },
-    withCredentials: true
-})
-
-const asyncLocalStorage = {
-    setItem: function (key, value) {
-        return Promise.resolve().then(function () {
-            localStorage.setItem(key, value);
-        });
-    },
-    getItem: function (key) {
-        return Promise.resolve().then(function () {
-            return localStorage.getItem(key);
-        });
-    }
-};
-
 
 function parseJwt (token) {
     var base64Url = token.split('.')[1];
@@ -89,17 +54,8 @@ function parseJwt (token) {
 export default class api {
     constructor () {
     }
-    static get access() {
-        return access
-    }
-    static get refresh() {
-        return refresh
-    }
-    static get base (){
-        return base
-    }
-    static get asyncLocalStorage() {
-        return asyncLocalStorage
+    static get call() {
+        return call
     }
     static parseJwt(token) {
         return parseJwt(token)
