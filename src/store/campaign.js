@@ -8,8 +8,10 @@ const campaign = {
             crm_id: 0,
             name: "",
             description:"",
-            start_time:0,
+            type:"",
+            start_time: 0,
             end_time: 0,
+            private: false,
         },
         current: null
     }),

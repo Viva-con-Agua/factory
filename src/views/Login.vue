@@ -1,5 +1,7 @@
 <template>
-    <div></div>
+    <div class="text-center">
+        <h1>{{ $t('login.required') }}</h1>
+    </div>
 </template>
 <script>
 export default {

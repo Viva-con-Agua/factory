@@ -9,23 +9,29 @@ const job = {
     mutations: {
         list(state, value) {
             state.list = value
+        },
+        current(state, value) {
+            state.current = value
         }
     },
     getters: {
         list(state) {
             return state.list
+        },
+        current(state) {
+            return state.current
         }
     },
     actions: {
-    list({commit}) {
-        return new Promise((resolve, reject) => {
-            api.access.get('/v1/email/jobs')
-                .then((response) => {commit('list', response.data.payload), resolve()})
-                .catch((error) => {
-                    reject(error)
-                })
-        })
-    } 
+        list({commit}) {
+            return new Promise((resolve, reject) => {
+                api.call.get('/v1/email/jobs')
+                    .then((response) => {commit('list', response.data.payload), resolve()})
+                    .catch((error) => {
+                        reject(error)
+                    })
+            })
+        } 
     }
 
 

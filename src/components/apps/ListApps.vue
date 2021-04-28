@@ -7,12 +7,14 @@
             <div class="vca-table-cell"><label>LogoutUrl</label></div>
             <div class="vca-table-cell table-right"><span>Options</span></div>
         </div>
-        <div v-for="element in list" :key="element.id" class="vca-table-row odd" title="Bearbeiten">
+        <div v-for="(element, index) in list" @click="current(element)" :key="element.id" class="vca-table-row" :class="{even: (index % 2), odd: !(index % 2)}" title="Bearbeiten">
             <div class="vca-table-cell"><label>{{element.id}}</label></div>
             <div class="vca-table-cell"><label>{{element.app_name }}</label></div>
             <div class="vca-table-cell"><label>{{element.redirect_url }}</label></div>
             <div class="vca-table-cell"><label>{{element.logout_url }}</label></div>
-            <div class="vca-table-cell table-right"><button @click="current(element)">Edit</button></div>
+            <div class="vca-table-cell table-right">
+                <img class="editable" src="@/assets/icons/edit.png" title="Edit" alt="Edit"/>
+            </div>
         </div>
     </div>
 </template>

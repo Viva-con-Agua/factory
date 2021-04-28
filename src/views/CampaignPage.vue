@@ -1,12 +1,9 @@
 <template>
-<div>
     <vca-card>
+        <h2>{{ $t('page.campaign') }}</h2>
         <InsertCampaign/>    
+        <ListCampaign/>
     </vca-card>
-    <vca-card>
-    <ListCampaign/>
-</vca-card>
-    </div>
 </template>
 <script>
 import InsertCampaign from '@/components/campaign/InsertCampaign'
