@@ -45,22 +45,10 @@ const session = {
 
         get({commit}, code) {
             return new Promise((resolve, reject) => {
-                api.base.get('/v1/auth/login/token?code=' + code.code)
+                api.call.get('/v1/auth/login/token?code=' + code.code)
                     .then(response => {
-                    api.asyncLocalStorage.setItem('access', response.data.access_token).then(function () {
-                        var token = response.data.access_token
-                        var user = api.parseJwt(token).user
-                        commit("user", user)
-                        console.log(user)
-                        return api.asyncLocalStorage.getItem('access')
-                    }).then(function () {
-                        console.log('Value has been set to:');
-                    });
-                    api.asyncLocalStorage.setItem('refresh', response.data.refresh_token).then(function () {
-                        return api.asyncLocalStorage.getItem('refresh');
-                    }).then(function () {
-                        console.log('Value has been set to:');
-                    });
+                        localStorage.setItem('access', response.data.access_token)
+                        localStorage.setItem('refresh', response.data.refresh_token)
                         resolve()
                     })
                     .catch(error => {
@@ -73,7 +61,7 @@ const session = {
         },
         test({commit}) {
             return new Promise((resolve, reject) => {
-                api.access.get('/restricted')
+                api.call.get('/restricted')
                     .then(response => {
                         commit('test', response.data), 
                             resolve()

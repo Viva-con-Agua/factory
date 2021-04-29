@@ -4,6 +4,7 @@ import app from './app.js'
 import session from './session.js'
 import mail from './mail.js'
 import campaign from './campaign.js'
+import navigation from './navigation.js'
 Vue.use(Vuex)
 export default new Vuex.Store({
     modules: {
@@ -11,6 +12,7 @@ export default new Vuex.Store({
         app: app,
         session: session,
         mail: mail,
-        campaign: campaign
+        campaign: campaign,
+        navigation: navigation
     },
 })

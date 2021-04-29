@@ -1,5 +1,6 @@
 <template>
     <vca-card>
+        <h2>{{ $t('page.apps') }}</h2>
         <InsertApp/>
         <ListApps/>
         <UpdateApp v-if="current!=null"/>
