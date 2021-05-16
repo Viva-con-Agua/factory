@@ -27,6 +27,7 @@ body {
 }
 
 #app-footer {
+    z-index: 100;
     flex-shrink: 0;
 }
 
@@ -57,6 +58,7 @@ $white: #FFFFFF;
 */
 
 $vca-primary-light: #b8d8ea;
+$vca-primary-dark: #002e6d;
 $vca-secondary-color: #55c0e9;
 $vca-secondary-darker: #03558c;
 $vca-red: #e50846;

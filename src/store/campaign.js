@@ -7,11 +7,14 @@ const campaign = {
         create: {
             crm_id: 0,
             name: "",
+            title: "",
             description:"",
             type:"",
             start_time: 0,
             end_time: 0,
             private: false,
+            contentImage: null,
+            headerImage: null,
         },
         current: null
     }),
@@ -33,6 +36,15 @@ const campaign = {
         },
         end_time (state, value) {
             state.create.end_time = value
+        },
+        header_image (state, value) {
+            state.create.header_image = value
+        },
+        content_image (state, value) {
+            state.create.content_image = value
+        },
+        updatetype (state, value) {
+            state.current.type = value
         }
 
     },

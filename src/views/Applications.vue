@@ -1,5 +1,5 @@
 <template>
-    <vca-card>
+    <vca-card class="content-text">
         <h2>{{ $t('page.apps') }}</h2>
         <InsertApp/>
         <ListApps/>

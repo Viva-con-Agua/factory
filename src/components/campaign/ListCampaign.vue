@@ -8,13 +8,13 @@
             <div class="vca-table-cell"><label>LogoutUrl</label></div>
             <div class="vca-table-cell table-right"><span>Options</span></div>
         </div>
-        <div v-for="element in list" :key="element.id" class="vca-table-row odd" title="Bearbeiten">
+        <div v-for="element in list" :key="element.id" class="vca-table-row odd" @click="current(element)" title="Bearbeiten">
             <div class="vca-table-cell"><label>{{element._id}}</label></div>
             <div class="vca-table-cell"><label>{{element.crm_id}}</label></div>
             <div class="vca-table-cell"><label>{{element.name }}</label></div>
             <div class="vca-table-cell"><label>{{element.description }}</label></div>
             <div class="vca-table-cell"><label>{{element.invide_token }}</label></div>
-            <div class="vca-table-cell table-right"><button @click="current(element)">Edit</button></div>
+            <div class="vca-table-cell"><label>Edit</label></div>
         </div>
     </div>
 </template>
@@ -29,7 +29,8 @@ export default {
     },
     methods: {
         current(value) {
-            this.$store.commit("app/current", value)
+            this.$store.commit("campaign/current", value)
+            this.$emit('edit')
         }
     }
 }

@@ -47,7 +47,7 @@
       "home": "Übersicht",
       "apps": "Anwendungen",
       "email": "E-Mails",
-      "campaign": "Kampagnen",
+      "campaign": "Events",
       "logout": "Logout",
       "signin": "Login"
     }
@@ -58,6 +58,38 @@
       "imprint": "Impressum",
       "language": "Sprache",
       "contact": "Kontakt"
+    }
+  },
+  "page": {
+    "apps": "Apps & URLs",
+    "email": "E-Mails & Jobs",
+    "campaign": "Events und Kampagnen"
+  },
+  "event": {
+    "insert": {
+      "placeholder": {
+        "name": "Name des Events (z.B. run4WATER 2021)",
+        "title": "Titel des Events (z.B. Laufen für unsere Projekte zum Weltwassertag",
+        "description": "Text für das Event",
+        "start_time": "Startdatum",
+        "end_time": "Enddatum",
+        "private": "<div class='highlight'>privates Event</div>",
+        "type": "Art des Events"
+      },
+      "error": {
+        "name": "Bitte gib einen Namen ein",
+        "title": "Bitte gib einen Titel ein",
+        "description": "Bitte gib einen Text ein",
+        "start_time": "Bitte gib ein Startdatum an",
+        "end_time": "Bitte gib ein Enddatum an",
+        "type": "Bitte gib die Art des Events an"
+      },
+      "type": {
+        "option": {
+          "run": "Spendenlauf",
+          "ride": "Spenden Radtour"
+        }
+      }
     }
   }
 }

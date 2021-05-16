@@ -1,9 +1,7 @@
 <template>
-    <div class="column-ov">
-        <vca-card>
-          <h1> Overview Factory</h1>
-        </vca-card>
-    </div>
+    <vca-card class="content-text">
+      <h1> Overview Factory</h1>
+    </vca-card>
 </template>
 
 <script>
