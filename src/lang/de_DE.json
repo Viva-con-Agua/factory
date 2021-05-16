@@ -68,6 +68,7 @@
   "event": {
     "insert": {
       "placeholder": {
+        "crm_id": "ID der Kampagne",
         "name": "Name des Events (z.B. run4WATER 2021)",
         "title": "Titel des Events (z.B. Laufen für unsere Projekte zum Weltwassertag",
         "description": "Text für das Event",
@@ -77,6 +78,7 @@
         "type": "Art des Events"
       },
       "error": {
+        "crm_id": "Bitte gib eine Kampagnen ID an",
         "name": "Bitte gib einen Namen ein",
         "title": "Bitte gib einen Titel ein",
         "description": "Bitte gib einen Text ein",
