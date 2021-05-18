@@ -40,11 +40,8 @@
 
         <vca-dropdown ref="type" v-model="event_type" :options="event_types" :title="$t('event.insert.type.title')" :placeholder="$t('event.insert.placeholder.type')" label=""/>
 
-        <button 
-               class="vca-button-small"
-               @click.self.prevent="validate">
-            Submit
-        </button>
+        <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.update') }}</button>
+        <vca-cancel-button class="vca-center" :placeholder="$t('actions.close')" @cancel="close"/>
     </div>
 </template>
 <script>
@@ -112,6 +109,9 @@ export default {
         },
         setContentImage(e) {
             this.contentImage = e
+        },
+        close() {
+            this.$store.commit('campaign/current', null)
         },
         submit() {
             this.$store.dispatch({type: 'campaign/update'})

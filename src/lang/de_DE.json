@@ -42,6 +42,12 @@
       }
     }
   },
+  "actions": {
+    "create": "Anlegen",
+    "update": "Aktualisieren",
+    "close": "Schließen",
+    "edit": "Bearbeiten"
+  },
   "navigation": {
     "tabs": {
       "home": "Übersicht",

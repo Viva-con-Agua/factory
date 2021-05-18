@@ -14,7 +14,7 @@
             <div class="vca-table-cell"><label>{{element.name }}</label></div>
             <div class="vca-table-cell"><label>{{element.description }}</label></div>
             <div class="vca-table-cell"><label>{{element.invide_token }}</label></div>
-            <div class="vca-table-cell"><label>Edit</label></div>
+            <div class="vca-table-cell"><label>{{ $t('actions.edit') }}</label></div>
         </div>
     </div>
 </template>
@@ -30,7 +30,6 @@ export default {
     methods: {
         current(value) {
             this.$store.commit("campaign/current", value)
-            this.$emit('edit')
         }
     }
 }

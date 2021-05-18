@@ -40,11 +40,7 @@
 
         <vca-dropdown ref="type" v-model="create.event_type" :options="event_types" :title="$t('event.insert.type.title')" :placeholder="$t('event.insert.placeholder.type')" label=""/>
 
-        <button 
-               class="vca-button-small"
-               @click.self.prevent="validate">
-            Submit
-        </button>
+        <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.create') }}</button>
     </div>
 </template>
 <script>

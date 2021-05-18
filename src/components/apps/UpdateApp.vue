@@ -27,11 +27,9 @@
         <label for="employee">Employee</label>
         <input type="checkbox" id="member" value="member" v-model="current.restriction">
         <label for="member">Member</label>
-        <button 
-               class="vca-button-small"
-               @click.self.prevent="validate">
-            Submit
-        </button>
+
+        <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.update') }}</button>
+        <vca-cancel-button class="vca-center" :placeholder="$t('actions.close')" @cancel="close"/>
     </div>
 </template>
 <script>
@@ -64,6 +62,9 @@ export default {
             } else {
                 this.submit()
             }
+        },
+        close() {
+            this.$store.commit('app/current', null)
         },
         submit() {
             this.$store.dispatch({type: 'app/update'})

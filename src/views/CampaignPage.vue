@@ -1,9 +1,9 @@
 <template>
     <vca-card class="content-text">
         <h2>{{ $t('page.campaign') }}</h2>
-        <InsertCampaign v-if="flow=='insert'"/>
-        <UpdateCampaign v-if="flow=='edit'"/>
-        <ListCampaign @edit="flow='edit'"/>
+        <InsertCampaign/>
+        <ListCampaign />
+        <UpdateCampaign v-if="current!=null"/>
     </vca-card>
 </template>
 <script>
@@ -17,11 +17,6 @@ export default {
         InsertCampaign,
         ListCampaign,
         UpdateCampaign
-    },
-    data() {
-        return {
-            flow: 'insert'
-        }
     },
     computed: {
         ...mapGetters({
