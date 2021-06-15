@@ -39,7 +39,6 @@ export default {
       localStorage.language = language
       this.$i18n.locale = language
       this.language = language
-      this.notification({title: "Language Change", body: "Language set to " + language, type: "success"})
     },
     flag(lang) {
       return 'flag-icon-' + lang
