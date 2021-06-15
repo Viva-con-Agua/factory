@@ -1,9 +1,11 @@
 <template>
-    <vca-card class="content-text">
-        <h2>{{ $t('page.email') }}</h2>
-        <JobList/>
-        <JobUpdate v-if="current!=null"/>
-    </vca-card>
+    <div class="content-text">
+        <vca-card>
+            <h2>{{ $t('page.email') }}</h2>
+            <JobList/>
+            <JobUpdate v-if="current!=null"/>
+        </vca-card>
+    </div>
 </template>
 <script>
 import JobList from '@/components/mail/JobList'

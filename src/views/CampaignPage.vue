@@ -1,10 +1,12 @@
 <template>
-    <vca-card class="content-text">
-        <h2>{{ $t('page.campaign') }}</h2>
-        <InsertCampaign/>
-        <ListCampaign />
-        <UpdateCampaign v-if="current!=null"/>
-    </vca-card>
+    <div class="content-text">
+        <vca-card>
+            <h2>{{ $t('page.campaign') }}</h2>
+            <InsertCampaign/>
+            <ListCampaign />
+            <UpdateCampaign v-if="current!=null"/>
+        </vca-card>
+    </div>
 </template>
 <script>
 import InsertCampaign from '@/components/campaign/InsertCampaign'

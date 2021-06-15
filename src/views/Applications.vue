@@ -1,10 +1,12 @@
 <template>
-    <vca-card class="content-text">
-        <h2>{{ $t('page.apps') }}</h2>
-        <InsertApp/>
-        <ListApps/>
-        <UpdateApp v-if="current!=null"/>
-    </vca-card>
+    <div class="content-text">
+        <vca-card>
+            <h2>{{ $t('page.apps') }}</h2>
+            <InsertApp/>
+            <ListApps/>
+            <UpdateApp v-if="current!=null"/>
+        </vca-card>
+    </div>
 </template>
 <script>
 import InsertApp from '@/components/apps/InsertApp'

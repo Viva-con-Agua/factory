@@ -1,7 +1,9 @@
 <template>
-    <vca-card class="content-text">
-      <h1> Overview Factory</h1>
-    </vca-card>
+    <div class="content-text">
+        <vca-card>
+            <h1> Overview Factory</h1>
+        </vca-card>
+    </div>
 </template>
 
 <script>
