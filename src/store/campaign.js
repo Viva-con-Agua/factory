@@ -85,7 +85,7 @@ const campaign = {
         },
         list({commit}) {
             return new Promise((resolve, reject) => {
-                api.call.get('/v1/moves/public/campaign')
+                api.call.get('/v1/moves/campaign')
                     .then((response) => {commit('list', response.data.payload), resolve()})
                     .catch((error) => {
                         reject(error)
