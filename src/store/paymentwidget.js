@@ -8,6 +8,13 @@ const paymentwidget = {
             crm_id: 0,
             name:"",
             description:"",
+            min_amount: 100,
+       payment_types: [
+            { name: 'civisepa', title: 'payment.type.sepa', default: true },
+            { name: 'sepa', title: 'payment.type.sepa' },
+            { name: 'creditcard', title: 'payment.type.creditcard' },
+            { name: 'paypal', title: 'payment.type.paypal' }
+        ],
         },
         current: null
     }),
