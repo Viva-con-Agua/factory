@@ -16,7 +16,13 @@ const paymentwidget = {
             { name: 'paypal', title: 'payment.type.paypal' }
         ],
         },
-        current: null
+        current: null,
+        payment_types: [
+            { name: 'civisepa', title: 'payment.type.sepa', default: true },
+            { name: 'sepa', title: 'payment.type.sepa' },
+            { name: 'creditcard', title: 'payment.type.creditcard' },
+            { name: 'paypal', title: 'payment.type.paypal' }
+        ],
     }),
 
     mutations: {
@@ -34,11 +40,18 @@ const paymentwidget = {
         list (state) {
             return state.list
         },
+        payment_types (state) {
+            return state.payment_types
+        }
     },
     actions: {
+        async add ({dispatch}) {
+            await dispatch("create")
+            await dispatch("list")
+        },
         create({commit, state}) {
             return new Promise((resolve, reject) => {
-               api.call.post('/v1/donations/campaign', state.create)
+               api.call.post('/v1/donations/form', state.create)
                     .then((response) => {commit('current', response.data.payload), resolve()})
                     .catch(error => {
                         reject(error)
@@ -47,7 +60,7 @@ const paymentwidget = {
         },
         list({commit}) {
             return new Promise((resolve, reject) => {
-                api.call.get('/v1/donations/campaign')
+                api.call.get('/v1/donations/form')
                     .then((response) => {commit('list', response.data.payload), resolve()})
                     .catch((error) => {
                         reject(error)

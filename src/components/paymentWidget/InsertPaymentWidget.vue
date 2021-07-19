@@ -66,7 +66,7 @@ export default {
             }
         },
         submit() {
-            this.$store.dispatch({type: 'paymentwidget/create'})
+            this.$store.dispatch({type: 'paymentwidget/add'})
                 .then(() => {
                     this.$emit('success')
                 })
