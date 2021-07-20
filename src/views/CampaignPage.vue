@@ -2,9 +2,17 @@
     <div class="content-text">
         <vca-card>
             <h2>{{ $t('page.campaign') }}</h2>
-            <InsertCampaign/>
-            <ListCampaign />
-            <UpdateCampaign v-if="current!=null"/>
+            <vca-accordion :header="$t('page.event.insert')">
+                <div slot="body">
+                    <InsertCampaign/>
+                </div>
+            </vca-accordion>
+            <vca-accordion :header="$t('page.event.list')">
+                <div slot="body">
+                    <ListCampaign />
+                    <UpdateCampaign v-if="current!=null"/>
+                </div>
+            </vca-accordion>
         </vca-card>
     </div>
 </template>

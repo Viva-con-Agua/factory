@@ -15,4 +15,9 @@ export default new Vuex.Store({
         campaign: campaign,
         navigation: navigation
     },
+    actions: {
+        async mailView({dispatch}) {
+            await dispatch('mail/job/list')
+        }
+    }
 })

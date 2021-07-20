@@ -1,6 +1,10 @@
 import api from './api.js'
+import pagination from './pagination.js'
 
 const campaign = {
+    modules: {
+        pg: pagination
+    },
     namespaced: true, 
     state: () => ({
         list: null,
@@ -85,7 +89,7 @@ const campaign = {
         },
         list({commit}) {
             return new Promise((resolve, reject) => {
-                api.call.get('/v1/moves/public/campaign')
+                api.call.get('/v1/moves/campaign')
                     .then((response) => {commit('list', response.data.payload), resolve()})
                     .catch((error) => {
                         reject(error)

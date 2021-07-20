@@ -6,6 +6,10 @@ import App from './App.vue'
 import router from './router.js'
 import store from './store'
 import VueI18n from 'vue-i18n'
+import VueQuillEditor from 'vue-quill-editor'
+import EmailEditor from 'vue-email-editor'
+import 'quill/dist/quill.core.css' // import styles
+import 'quill/dist/quill.snow.css' // for snow theme
 import 'vca-ui/dist/vca-ui.css'
 
 
@@ -15,6 +19,8 @@ Vue.use(Notifications)
 Vue.use(VcaUi)
 Vue.use(VueI18n)
 Vue.use(Vuelidate)
+Vue.use(VueQuillEditor)
+Vue.use(EmailEditor)
 Vue.config.productionTip = false
 
 

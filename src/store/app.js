@@ -41,7 +41,6 @@ const app = {
             await dispatch({type: 'updateReq'})
             await dispatch({type: 'list'})
         },
-
         create({commit, state}) {
             return new Promise((resolve, reject) => {
                api.call.post('/v1/apps', state.create)
