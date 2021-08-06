@@ -7,7 +7,9 @@ const navigation = {
             { title: 'navigation.tabs.apps', route: { name: "Applications" }, needSession: false},
             { title: 'navigation.tabs.email', route: { name: "EmailPage" }, needSession: false},
             { title: 'navigation.tabs.campaign', route: { name: "Campaign" }, needSession: false},
+            { title: 'navigation.tabs.paymentWidget', route: { name: "PaymentWidget" }, needSession: false},
             { title: 'navigation.tabs.logout', route: { name: "Logout" }, needSession: false},
+
             //{ title: 'navigation.tabs.signin', route: { name: "Sign" }, needSession: false},
         ]
     }),

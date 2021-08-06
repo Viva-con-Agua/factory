@@ -1,12 +1,14 @@
 <template>
-    <vca-card>
+    <vca-card class="content-text">
         <h2>{{ $t('page.campaign') }}</h2>
-        <InsertCampaign/>    
-        <ListCampaign/>
+        <InsertCampaign/>
+        <ListCampaign />
+        <UpdateCampaign v-if="current!=null"/>
     </vca-card>
 </template>
 <script>
 import InsertCampaign from '@/components/campaign/InsertCampaign'
+import UpdateCampaign from '@/components/campaign/UpdateCampaign'
 import ListCampaign from '@/components/campaign/ListCampaign'
 import { mapGetters } from 'vuex'
 export default {
@@ -14,6 +16,7 @@ export default {
     components: {
         InsertCampaign,
         ListCampaign,
+        UpdateCampaign
     },
     computed: {
         ...mapGetters({

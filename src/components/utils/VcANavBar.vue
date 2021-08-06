@@ -1,10 +1,11 @@
 <template>
   <div>
     <div>
-      <ul>
+      <ul id="menuList" class="menu-inactive">
         <li v-for="tab in tabs" @click="selectTab(tab)" :key="tab.id" :class="{ 'is-active': tab.isActive }">
           <a :href="tab.href">{{ tab.title }}</a>
         </li>
+        <li @click="closeTabs()" class="close-tabs"><a>X</a></li>
       </ul>
     </div>
 
@@ -28,6 +29,9 @@ export default {
       this.tabs.forEach(tab => {
         tab.isActive = (tab.title == selectedTab.title);
       });
+    },
+    closeTabs() {
+      this.$emit("close")
     }
   }
 }

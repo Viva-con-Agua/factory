@@ -27,11 +27,7 @@
         <label for="employee">Employee</label>
         <input type="checkbox" id="member" value="member" v-model="create.restriction">
         <label for="member">Member</label>
-        <button 
-               class="vca-button-small"
-               @click.self.prevent="validate">
-            Submit
-        </button>
+        <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.create') }}</button>
     </div>
 </template>
 <script>

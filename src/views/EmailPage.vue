@@ -1,5 +1,5 @@
 <template>
-    <vca-card>
+    <vca-card class="content-text">
         <h2>{{ $t('page.email') }}</h2>
         <JobList/>
         <JobUpdate v-if="current!=null"/>

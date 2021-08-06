@@ -23,6 +23,13 @@ const routes = [
 
     },
     {
+        path: '/payment-widget',
+        name: 'PaymentWidget',
+        component: loadView('PaymentWidgetPage'),
+        meta: {requiresAuth: true}
+
+    },
+    {
         path: '/emails',
         name: 'EmailPage',
         component: loadView('EmailPage'),

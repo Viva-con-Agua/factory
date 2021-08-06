@@ -9,7 +9,7 @@
             <div class="vca-table-cell table-right"><span>Options</span></div>
         </div>
         <div v-for="element in list" :key="element.id" class="vca-table-row odd" @click="current(element)" title="Bearbeiten">
-            <div class="vca-table-cell"><label>{{element._id}}</label></div>
+            <div class="vca-table-cell"><label>{{element.id}}</label></div>
             <div class="vca-table-cell"><label>{{element.crm_id}}</label></div>
             <div class="vca-table-cell"><label>{{element.name }}</label></div>
             <div class="vca-table-cell"><label>{{element.description }}</label></div>
@@ -21,15 +21,15 @@
 <script>
 import { mapGetters } from 'vuex'
 export default {
-    name: 'ListApps',
+    name: 'ListPaymentWidget',
     computed: {
         ...mapGetters({
-            list: 'campaign/list'
+            list: 'paymentwidget/list'
         })
     },
     methods: {
         current(value) {
-            this.$store.commit("campaign/current", value)
+            this.$store.commit("paymentwidget/current", value)
         }
     }
 }
