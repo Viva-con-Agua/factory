@@ -23,6 +23,13 @@
             v-model.trim="create.description"
             :rules="$v.create.description">
         </vca-input>
+        <vca-input
+            ref="company_id"
+            errorMsg="company_id angeben"
+            placeholder="company_id"
+            v-model.trim="create.company_id"
+            :rules="$v.create.company_id">
+        </vca-input>
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.create') }}</button>
     </div>
 </template>
@@ -53,6 +60,7 @@ export default {
             crm_id: { required },
             name: { required },
             description: { required },
+            company_id: {required},
         }
     },
     methods: {
@@ -61,6 +69,7 @@ export default {
                 this.$refs.crm_id.validate()
                 this.$refs.name.validate()
                 this.$refs.description.validate()
+                this.$refs.company_id.validate()
             } else {
                 this.submit()
             }
