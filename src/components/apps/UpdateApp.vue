@@ -29,7 +29,13 @@
         <label for="member">Member</label>
 
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.update') }}</button>
-        <vca-cancel-button class="vca-center" :placeholder="$t('actions.close')" @cancel="close"/>
+        <div class="vca-center">
+            <vca-cancel-button :placeholder="$t('actions.close')" @click="resetCurrent" />
+        </div>
+
+
+
+
     </div>
 </template>
 <script>
@@ -63,7 +69,7 @@ export default {
                 this.submit()
             }
         },
-        close() {
+        resetCurrent() {
             this.$store.commit('app/current', null)
         },
         submit() {

@@ -41,14 +41,18 @@
         <vca-dropdown ref="type" v-model="event_type" :options="event_types" :title="$t('event.insert.type.title')" :placeholder="$t('event.insert.placeholder.type')" label=""/>
 
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.update') }}</button>
-        <vca-cancel-button class="vca-center" :placeholder="$t('actions.close')" @cancel="close"/>
+        <div class="vca-center">
+            <vca-cancel-button :placeholder="$t('actions.close')" @click="resetCurrent" />
+        </div>
+
+
     </div>
 </template>
 <script>
 import { required } from 'vuelidate/lib/validators'
 //import ImageUpload from '@/components/campaign/ImageUpload.vue'
 export default {
-    name: 'UpdateApp',
+    name: 'UpdateCampaign',
     components: {
   //      ImageUpload
     },
@@ -110,8 +114,8 @@ export default {
         setContentImage(e) {
             this.contentImage = e
         },
-        close() {
-            this.$store.commit('campaign/current', null)
+        resetCurrent() {
+            this.$store.commit("campaign/current", null)
         },
         submit() {
             this.$store.dispatch({type: 'campaign/update'})

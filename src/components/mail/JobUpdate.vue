@@ -26,9 +26,10 @@
                     
                 </div>
             </vca-accordion>
-            <div class="vca-right">
-                <vca-cancel-button :title="$t('job.form.cancel')" @click="resetCurrent" class="">{{ $t('job.form.cancel') }}</vca-cancel-button>
-                <vca-bordered-button :title="$t('job.form.save')" @submit="save" :placeholder="$t('job.form.save')"/>
+            <div class="vca-button" @click.self.prevent="save">{{ $t('job.form.save') }}</div>
+
+            <div class="vca-center">
+                <vca-cancel-button :placeholder="$t('job.form.cancel')" @click="resetCurrent" />
             </div>
         </div>
 

@@ -1,110 +1,95 @@
 <template>
     <div class="table-container">
-        <div class="vca-table">
-        <div class="vca-table-header">
-            <div class="vca-table-cell"><label>uuid</label></div>
-            <div class="vca-table-cell"><label>CRM_ID</label></div>
-            <div class="vca-table-cell"><label>Name</label></div>
-            <div class="vca-table-cell"><label>RedirectUrl</label></div>
-            <div class="vca-table-cell"><label>LogoutUrl</label></div>
-            <div class="vca-table-cell table-right"><span>Options</span></div>
-        </div>
-        <div v-for="element in list" :key="element.id" class="vca-table-row odd" @click="current(element)" title="Bearbeiten">
-            <div class="vca-table-cell"><label>{{element._id}}</label></div>
-            <div class="vca-table-cell"><label>{{element.crm_id}}</label></div>
-            <div class="vca-table-cell"><label>{{element.name }}</label></div>
-            <div class="vca-table-cell"><label>{{element.description }}</label></div>
-            <div class="vca-table-cell"><label>{{element.invide_token }}</label></div>
-            <div class="vca-table-cell"><label>{{ $t('actions.edit') }}</label></div>
-        </div>
-    </div>
-        <h3>{{ $t('ranking.runner.label') }}</h3>
-        <p v-html="$t('ranking.runner.description')"></p>
-        <table class="table-desktop">
-            <colgroup>
-                <col width="1%" />
-                <col width="25%" />
-                <col width="25%" />
-                <col width="25%" />
-                <col width="25%" />
-            </colgroup>
-            <thead>
-                <table-header-pagination :placeholder="$t('ranking.team.search')" :store="store" :colspan="colspan" />
+    <h3>{{ $t('events.label') }}</h3>
+    <p v-html="$t('events.description')"></p>
+    <table class="table-desktop">
+        <colgroup>
+            <col width="25%" />
+            <col width="25%" />
+            <col width="25%" />
+            <col width="25%" />
+            <col width="1%" />
+        </colgroup>
+        <thead>
+            <table-header-pagination :placeholder="$t('events.name.search')" :store="store" :colspan="colspan" />
 
-                <tr class="vca-table-header">
-                    <th class="vca-table-cell"><label>{{ $t('ranking.place') }}</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('display_name')"><label> {{ $t('ranking.runner.name') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('distance')"><label>{{ $t('ranking.distance') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('time')"><label>{{ $t('ranking.time') }} &varr;</label></th>
-                </tr>
+            <tr class="vca-table-header">
+                <th class="vca-table-cell sortable" @click="sort('_id')"><label>{{ $t('events.id') }} &varr;</label></th>
+                <th class="vca-table-cell sortable" @click="sort('crm_id')"><label> {{ $t('events.crm_id') }} &varr;</label></th>
+                <th class="vca-table-cell sortable" @click="sort('name')"><label>{{ $t('events.name') }} &varr;</label></th>
+                <th class="vca-table-cell sortable" @click="sort('title')"><label>{{ $t('events.title') }} &varr;</label></th>
+                <th class="vca-table-cell"><label>{{ $t('table.options') }}</label></th>
+            </tr>
 
-            </thead>
-            <tbody>
-                <table-content-prev :store="store" :colspan="colspan" />
-                <table-border :colspan="colspan"/>
+        </thead>
+        <tbody>
+            <table-content-prev :store="store" :colspan="colspan" />
+            <table-border :colspan="colspan"/>
 
-                <tr class="vca-table-row" :class="{last: (index + 1 == pg.pageSize)}" v-for="(res, index) in getList()" :key="index">
-                    <td class=""><label> {{ res.crm_id }} </label></td>
-                    <td class=""><label> {{ res.name }} </label></td>
-                    <td class=""><label> {{ res.description }} </label></td>
-                    <td class=""><label> {{ res.title }} </label></td>
-                </tr>
-                <tr class="vca-table-row last" v-if="getList().length == 0">
-                    <td :colspan="colspan"><p class="text-center">{{ $t('ranking.runner.no_results') }}</p></td>
-                </tr>
+            <tr class="vca-table-row" @click="setCurrent(res)" :class="{last: (index + 1 == pg.pageSize)}" v-for="(res, index) in getList()" :key="index">
+                <td class=""><label> {{ res._id }} </label></td>
+                <td class=""><label> {{ res.crm_id }} </label></td>
+                <td class=""><label> {{ res.name }} </label></td>
+                <td class=""><label> {{ res.title }} </label></td>
+                <td class="vca-table-cell"><label><img class="editable" src="@/assets/icons/edit.png" title="Edit" alt="Edit"/></label></td>
+            </tr>
+            <tr class="vca-table-row last" v-if="getList().length == 0">
+                <td :colspan="colspan"><p class="text-center">{{ $t('events.no_results') }}</p></td>
+            </tr>
 
-                <table-border :colspan="colspan"/>
-                <table-content-next :store="store" :colspan="colspan" />
-                <table-border :colspan="colspan"/>
-                <table-bottom-pagination :store="store" :colspan="colspan" />
-            </tbody>
-        </table>
+            <table-border :colspan="colspan"/>
+            <table-content-next :store="store" :colspan="colspan" />
+            <table-border :colspan="colspan"/>
+            <table-bottom-pagination :store="store" :colspan="colspan" />
+        </tbody>
+    </table>
 
-        <table class="table-mobile">
-            <colgroup>
-                <col width="100%" />
-            </colgroup>
-            <thead>
-                <table-search :store="store" :placeholder="$t('ranking.runner.search')" />
+    <table class="table-mobile">
+        <colgroup>
+            <col width="100%" />
+        </colgroup>
+        <thead>
+            <table-search :store="store" :placeholder="$t('events.name.search')" />
 
-                <tr class="vca-table-nav">
-                    <td class="text-right vca-table-sort vca-table-nav-cell">
-                        <div class="vca-row text-center">
-                            <div><img width="20px" src="~@/assets/icons/sort.png"></div>
-                            <div class="sortable" @click="sort('display_name')"><label>{{ $t('ranking.mobile.name') }}</label></div>
-                            <div class="sortable" @click="sort('distance')"><label>{{ $t('ranking.mobile.distance') }}</label></div>
-                            <div class="sortable" @click="sort('time')"><label>{{ $t('ranking.mobile.time') }}</label></div>
-                        </div>
-                    </td>
-                </tr>
-
-            </thead>
-            <tbody>
-                <table-content-prev :store="store" />
-                <table-border/>
-
-                <tr class="vca-table-row" :class="{last: (index + 1 == pg.pageSize)}" v-for="(res, index) in getList()" :key="index">
-                    <td class="vca-table-cell" >
-                    <div class="vca-row">
-                        <div class="vca-left vca-table-index">
-                            <h3>{{ res.rank }}</h3>
-                        </div>
-                        <div class="vca-column vca-table-content text-left">
-                            <h3>{{ res.crm_id }}</h3>
-                        </div>
+            <tr class="vca-table-nav">
+                <td class="text-right vca-table-sort vca-table-nav-cell">
+                    <div class="vca-row text-center">
+                        <div><img width="20px" src="~@/assets/icons/sort.png"></div>
+                        <div class="sortable" @click="sort('_id')"><label>{{ $t('events.id') }}</label></div>
+                        <div class="sortable" @click="sort('crm_id')"><label>{{ $t('events.crm_id') }}</label></div>
+                        <div class="sortable" @click="sort('name')"><label>{{ $t('events.name') }}</label></div>
+                        <div class="sortable" @click="sort('title')"><label>{{ $t('events.title') }}</label></div>
                     </div>
-                    </td>
-                </tr>
-                <tr class="vca-table-row last" v-if="getList().length == 0">
-                    <td><p class="text-center">{{ $t('ranking.runner.no_results') }}</p></td>
-                </tr>
+                </td>
+            </tr>
 
-                <table-border/>
-                <table-content-next :store="store" />
-                <table-border/>
-                <table-bottom-pagination :store="store" />
-            </tbody>
-        </table>
+        </thead>
+        <tbody>
+            <table-content-prev :store="store" />
+            <table-border/>
+
+            <tr class="vca-table-row" :class="{last: (index + 1 == pg.pageSize)}" v-for="(res, index) in getList()" :key="index">
+                <td class="vca-table-cell" >
+                <div class="vca-row">
+                    <div class="vca-left vca-table-index">
+                        <h3>{{ res.name }}</h3>
+                    </div>
+                    <div class="vca-column vca-table-content text-left">
+                        <h3>{{ res.title }}</h3>
+                    </div>
+                </div>
+                </td>
+            </tr>
+            <tr class="vca-table-row last" v-if="getList().length == 0">
+                <td><p class="text-center">{{ $t('events.no_results') }}</p></td>
+            </tr>
+
+            <table-border/>
+            <table-content-next :store="store" />
+            <table-border/>
+            <table-bottom-pagination :store="store" />
+        </tbody>
+    </table>
 
   </div>
 </template>
@@ -112,7 +97,7 @@
 
 import { mapGetters, mapState } from 'vuex'
 export default {
-    name: 'ListApps',    
+    name: 'ListCampaign',    
     data() {
         return {
             colspan: 5,
@@ -140,8 +125,13 @@ export default {
         })
     },
     methods: {
-        current(value) {
-            this.$store.commit("campaign/current", value)
+        setCurrent(value) {
+            if (this.current && this.current.id == value.id) {
+                this.$store.commit("campaign/current", null)
+            } else {
+                this.$store.commit("campaign/current", value)
+            }
+            
         },
         getList() {
             // If the list is empty, we have an empty array

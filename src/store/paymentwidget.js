@@ -1,6 +1,10 @@
 import api from './api.js'
+import pagination from './pagination.js'
 
 const paymentwidget = {
+    modules: {
+        pg: pagination
+    },
     namespaced: true,
     state: () => ({
         list: null,
@@ -29,6 +33,9 @@ const paymentwidget = {
         create (state, value) {
             state.create = value
         },
+        current (state, value) {
+            state.current = value
+        },
         crm_id (state, value) {
             state.create.crm_id = Number.parseInt(value)
         },
@@ -39,6 +46,9 @@ const paymentwidget = {
     getters:{
         list (state) {
             return state.list
+        },
+        current (state) {
+            return state.current
         },
         payment_types (state) {
             return state.payment_types

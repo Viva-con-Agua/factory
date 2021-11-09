@@ -52,6 +52,7 @@
     "tabs": {
       "home": "Übersicht",
       "apps": "Anwendungen",
+      "paymentWidget": "Formulare",
       "email": "E-Mails",
       "campaign": "Events",
       "logout": "Logout",
@@ -72,6 +73,9 @@
     "campaign": "Events und Kampagnen"
   },
   "event": {
+    "popup": {
+      "edit": "Event \"{0}\" bearbeiten"
+    },
     "insert": {
       "placeholder": {
         "crm_id": "ID der Kampagne",

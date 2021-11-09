@@ -1,7 +1,10 @@
 import api from './api.js'
+import pagination from './pagination.js'
 
 const app = {
-
+    modules: {
+        pg: pagination
+    },
     namespaced: true,
     state: () => ({
         list: null,

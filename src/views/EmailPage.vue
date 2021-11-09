@@ -2,19 +2,44 @@
     <div class="content-text">
         <vca-card>
             <h2>{{ $t('page.email') }}</h2>
-            <vca-accordion :header="$t('email.addresses.title')">
-                <div slot="body">
-                    <InsertEmail />
-                    
-                </div>
-            </vca-accordion>
-            <vca-accordion :header="$t('email.jobs.title')">
-                <div slot="body">
-                    <InsertJob/>
-                    <JobList/>
-                    <JobUpdate v-if="current!=null"/>
-                </div>
-            </vca-accordion>
+
+
+            <vca-tabs>
+                <vca-tab :title="$t('email.jobs.title')" selected="true">
+
+                    <vca-accordion :header="$t('email.jobs.insert')">
+                        <div slot="body">
+                            <InsertJob/>
+                        </div>
+                    </vca-accordion>
+
+
+                    <vca-accordion :header="$t('email.jobs.list')">
+                        <div slot="body">
+
+                            <JobList/>
+
+
+                            <vca-popup v-if="current!=null" :show="current!=null" :title="$t('event.popup.edit', {0: current.name})" @close="setCurrent()">
+                                <JobUpdate />
+                            </vca-popup>
+                        </div>
+                    </vca-accordion>
+
+
+                </vca-tab>
+                <vca-tab :title="$t('email.addresses.title')">
+
+                    <vca-accordion :header="$t('email.addresses.isert')">
+                        <div slot="body">
+                            <InsertEmail />
+                        </div>
+                    </vca-accordion>
+                        
+                </vca-tab>
+            </vca-tabs>
+
+            
         </vca-card>
     </div>
 </template>
@@ -36,6 +61,11 @@ export default {
     },
     created () {
         this.$store.dispatch('mailView')
+    },
+    methods: {
+        setCurrent() {
+            this.$store.commit("mail/job/current", null)
+        }
     }
 }
 

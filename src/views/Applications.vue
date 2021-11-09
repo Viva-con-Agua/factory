@@ -2,9 +2,21 @@
     <div class="content-text">
         <vca-card>
             <h2>{{ $t('page.apps') }}</h2>
-            <InsertApp/>
-            <ListApps/>
-            <UpdateApp v-if="current!=null"/>
+
+            <vca-accordion :header="$t('page.app.insert')">
+                <div slot="body">
+                    <InsertApp/>
+                </div>
+            </vca-accordion>
+            <vca-accordion :header="$t('page.app.list')">
+                <div slot="body">
+                    <ListApps />
+                    
+                    <vca-popup v-if="current!=null" :show="current!=null" :title="$t('event.popup.edit', {0: current.name})" @close="setCurrent()">
+                        <UpdateApp />
+                    </vca-popup>
+                </div>
+            </vca-accordion>
         </vca-card>
     </div>
 </template>
@@ -27,6 +39,11 @@ export default {
     },
     created () {
         this.$store.dispatch({ type: "app/list"})
+    },
+    methods: {
+        setCurrent() {
+            this.$store.commit("app/current", null)
+        }
     }
 }
 

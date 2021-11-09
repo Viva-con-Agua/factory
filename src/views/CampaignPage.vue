@@ -10,7 +10,10 @@
             <vca-accordion :header="$t('page.event.list')">
                 <div slot="body">
                     <ListCampaign />
-                    <UpdateCampaign v-if="current!=null"/>
+                    
+                    <vca-popup v-if="current!=null" :show="current!=null" :title="$t('event.popup.edit', {0: current.name})" @close="setCurrent()">
+                        <UpdateCampaign />
+                    </vca-popup>
                 </div>
             </vca-accordion>
         </vca-card>
@@ -35,6 +38,11 @@ export default {
     },
     created () {
         this.$store.dispatch({ type: "campaign/list"})
+    },
+    methods: {
+        setCurrent() {
+            this.$store.commit("campaign/current", null)
+        }
     }
 }
 

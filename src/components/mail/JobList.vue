@@ -16,7 +16,7 @@
                     <th class="vca-table-cell sortable" @click="sort('name')"><label>{{ $t('joblist.name') }} &varr;</label></th>
                     <th class="vca-table-cell sortable" @click="sort('case')"><label> {{ $t('joblist.case') }} &varr;</label></th>
                     <th class="vca-table-cell sortable" @click="sort('scope')"><label>{{ $t('joblist.scope') }} &varr;</label></th>
-                    <th class="vca-table-cell"><label>{{ $t('table.options') }} &varr;</label></th>
+                    <th class="vca-table-cell"><label>{{ $t('table.options') }}</label></th>
                 </tr>
 
             </thead>
