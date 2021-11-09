@@ -5,6 +5,7 @@ import session from './session.js'
 import mail from './mail.js'
 import campaign from './campaign.js'
 import navigation from './navigation.js'
+import paymentwidget from './paymentwidget.js'
 Vue.use(Vuex)
 export default new Vuex.Store({
     modules: {
@@ -13,11 +14,15 @@ export default new Vuex.Store({
         session: session,
         mail: mail,
         campaign: campaign,
-        navigation: navigation
+        navigation: navigation,
+        paymentwidget: paymentwidget,
     },
     actions: {
         async mailView({dispatch}) {
             await dispatch('mail/job/list')
+        },
+        async payment_widget_page ({dispatch}) {
+            await dispatch({type: 'paymentwidget/list'})
         }
     }
 })
