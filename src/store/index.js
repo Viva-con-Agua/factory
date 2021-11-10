@@ -6,12 +6,14 @@ import mail from './mail.js'
 import campaign from './campaign.js'
 import navigation from './navigation.js'
 import paymentwidget from './paymentwidget.js'
+import company from './company.js'
 Vue.use(Vuex)
 export default new Vuex.Store({
     modules: {
         //namespaced: true,
         app: app,
         session: session,
+        company: company,
         mail: mail,
         campaign: campaign,
         navigation: navigation,
@@ -23,6 +25,9 @@ export default new Vuex.Store({
         },
         async payment_widget_page ({dispatch}) {
             await dispatch({type: 'paymentwidget/list'})
+        },
+        async companyView ({dispatch}) {
+            await dispatch({type: 'company/list'})
         }
     }
 })

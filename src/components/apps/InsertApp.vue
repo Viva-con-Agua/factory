@@ -23,20 +23,23 @@
         </vca-input>
 
         <div class="vca-row">
-            <div>{{ $t('app.insert.placeholder.permissions') }}</div>
+            <div>{{ $t('app.insert.placeholder.permissions.title') }}</div>
             <div class="vca-column">
 
                 <vca-checkbox
+                    id="admin"
                     value="admin"
                     v-model="create.restriction">
                     {{ $t('app.insert.placeholder.permissions.admin') }}
                 </vca-checkbox>
                 <vca-checkbox
+                    id="employee"
                     value="employee"
                     v-model="create.restriction">
                     {{ $t('app.insert.placeholder.permissions.employee') }}
                 </vca-checkbox>
                 <vca-checkbox
+                    id="member"
                     value="member"
                     v-model="create.restriction">
                     {{ $t('app.insert.placeholder.permissions.member') }}
@@ -46,13 +49,7 @@
               
             
         </div>
-        {{ create.restriction }}
-        <input type="checkbox" id="admin" value="admin" v-model="create.restriction">
-        <label for="admin">Admin</label>
-        <input type="checkbox" id="employee" value="employee" v-model="create.restriction">
-        <label for="employee">Employee</label>
-        <input type="checkbox" id="member" value="member" v-model="create.restriction">
-        <label for="member">Member</label>
+
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.create') }}</button>
     </div>
 </template>

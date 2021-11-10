@@ -1,8 +1,8 @@
 <template>
     <div class="table-container">
 
-        <h3>{{ $t('ranking.runner.label') }}</h3>
-        <p v-html="$t('ranking.runner.description')"></p>
+        <h3>{{ $t('app.list.label') }}</h3>
+        <p v-html="$t('app.list.description')"></p>
         <table class="table-desktop">
             <colgroup>
                 <col width="25%" />
@@ -12,13 +12,13 @@
                 <col width="1%" />
             </colgroup>
             <thead>
-                <table-header-pagination :placeholder="$t('app.name.search')" :store="store" :colspan="colspan" />
+                <table-header-pagination :placeholder="$t('app.list.name.search')" :store="store" :colspan="colspan" />
 
                 <tr class="vca-table-header">
-                    <th class="vca-table-cell sortable" @click="sort('id')"><label>{{ $t('app.id') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('name')"><label> {{ $t('app.name') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('redirect_url')"><label>{{ $t('app.redirect_url') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('logout_url')"><label>{{ $t('app.logout_url') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('id')"><label>{{ $t('app.list.id') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('name')"><label> {{ $t('app.list.name') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('redirect_url')"><label>{{ $t('app.list.redirect_url') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('logout_url')"><label>{{ $t('app.list.logout_url') }} &varr;</label></th>
                     <th class="vca-table-cell"><label>{{ $t('table.options') }}</label></th>
                 </tr>
 
@@ -56,10 +56,10 @@
                     <td class="text-right vca-table-sort vca-table-nav-cell">
                         <div class="vca-row text-center">
                             <div><img width="20px" src="~@/assets/icons/sort.png"></div>
-                            <div class="sortable" @click="sort('id')"><label>{{ $t('app.id') }}</label></div>
-                            <div class="sortable" @click="sort('app_name')"><label>{{ $t('app.app_name') }}</label></div>
-                            <div class="sortable" @click="sort('redirect_url')"><label>{{ $t('app.redirect_url') }}</label></div>
-                            <div class="sortable" @click="sort('logout_url')"><label>{{ $t('app.logout_url') }}</label></div>
+                            <div class="sortable" @click="sort('id')"><label>{{ $t('app.list.id') }}</label></div>
+                            <div class="sortable" @click="sort('app_name')"><label>{{ $t('app.list.app_name') }}</label></div>
+                            <div class="sortable" @click="sort('redirect_url')"><label>{{ $t('app.list.redirect_url') }}</label></div>
+                            <div class="sortable" @click="sort('logout_url')"><label>{{ $t('app.list.logout_url') }}</label></div>
                         </div>
                     </td>
                 </tr>

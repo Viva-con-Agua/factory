@@ -53,6 +53,7 @@
       "home": "Übersicht",
       "apps": "Anwendungen",
       "paymentWidget": "Formulare",
+      "company": "Unternehmen",
       "email": "E-Mails",
       "campaign": "Events",
       "logout": "Logout",
@@ -70,7 +71,41 @@
   "page": {
     "apps": "Apps & URLs",
     "email": "E-Mails & Jobs",
-    "campaign": "Events und Kampagnen"
+    "company": "Organisationen & Unternehmen",
+    "paymentwidget": "Spenden- & Mitgliedsformulare",
+    "campaign": "Events & Kampagnen"
+  },
+  "app": {
+    "title": {
+      "insert": "App anlegen",
+      "list": "Apps anzeigen und bearbeiten"
+    },
+    "popup": {
+      "edit": "App \"{0}\" bearbeiten"
+    },
+    "insert": {
+      "placeholder": {
+        "name": "Name der App",
+        "redirect_url": "Redirect URL",
+        "logout_url": "Logout URL",
+        "permissions": {
+          "title": "Berechtigungen",
+          "admin": "Administrator",
+          "employee": "Mitarbeiter*in",
+          "member": "Member"
+        }
+      },
+      "error": {
+        "name": "Bitte gib einen Namen ein",
+        "type": "Bitte gib die Art des Events an"
+      },
+      "type": {
+        "option": {
+          "run": "Spendenlauf",
+          "ride": "Spenden Radtour"
+        }
+      }
+    }
   },
   "event": {
     "popup": {

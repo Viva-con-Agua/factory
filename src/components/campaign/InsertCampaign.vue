@@ -6,7 +6,7 @@
             :placeholder="$t('event.insert.placeholder.crm_id')"
             :max="Infinity"
             :min="1"
-            v-model.trim="crm_id"
+            v-model.trim="create.crm_id"
             :rules="$v.create.crm_id">
         </vca-number>
         <vca-input
@@ -38,7 +38,7 @@
             <span v-html="$t('event.insert.placeholder.private')"></span><br/>
         </vca-checkbox>
 
-        <vca-dropdown ref="type" v-model="create.event_type" :options="event_types" :title="$t('event.insert.type.title')" :placeholder="$t('event.insert.placeholder.type')" label=""/>
+        <vca-dropdown ref="type" v-model="create.type" :options="event_types" :title="$t('event.insert.type.title')" :placeholder="$t('event.insert.placeholder.type')" label=""/>
 
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.create') }}</button>
     </div>
@@ -47,7 +47,7 @@
 import { required } from 'vuelidate/lib/validators'
 //import ImageUpload from '@/components/campaign/ImageUpload.vue'
 export default {
-    name: 'InsertApp',
+    name: 'InsertCampaign',
     components: {
   //      ImageUpload
     },
@@ -69,7 +69,7 @@ export default {
                 this.$store.commit('campaign/create', value)
             }
         },
-        event_type: {
+        type: {
             get () {
                 return this.event_types.find(el => el.value == this.$store.state.campaign.create.type)
             },
@@ -132,6 +132,7 @@ export default {
     methods: {
         validate() {
             if (this.$v.$invalid) {
+                alert("")
                 this.$refs.crm_id.validate()
                 this.$refs.name.validate()
                 this.$refs.title.validate()

@@ -16,6 +16,13 @@
             v-model.trim="current.name"
             :rules="$v.current.name">
         </vca-input>
+        <vca-textarea
+            ref="description"
+            :errorMsg="$t('donation_widget.insert.error.description')"
+            :placeholder="$t('donation_widget.insert.placeholder.description')"
+            v-model.trim="current.description"
+            :rules="$v.current.description">
+        </vca-textarea>
         <vca-input
             ref="description"
             :errorMsg="$t('donation_widget.insert.error.name')"
@@ -26,7 +33,28 @@
         <vca-dropdown ref="type" :multiple="true" v-model="payment_type" :options="payment_types" :title="$t('donation_widget.insert.paymenttype.title')" :placeholder="$t('donation_widget.insert.placeholder.paymenttype')" label=""/>
         <vca-dropdown ref="type" :multiple="true" v-model="subscription_type" :options="subscription_types" :title="$t('donation_widget.insert.type.title')" :placeholder="$t('donation_widget.insert.placeholder.type')" label=""/>
 
+        <vca-number
+            ref="pay_day"
+            :errorMsg="$t('donation_widget.insert.error.pay_day')"
+            :placeholder="$t('donation_widget.insert.placeholder.pay_day')"
+            :max="31"
+            :min="1"
+            v-model="current.pay_day"
+            :rules="$v.current.pay_day">
+        </vca-number>
+
+        <vca-input
+            ref="company_id"
+            :errorMsg="$t('donation_widget.insert.error.company_id')"
+            :placeholder="$t('donation_widget.insert.placeholder.company_id')"
+            v-model.trim="current.company_id"
+            :rules="$v.current.company_id">
+        </vca-input>
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.update') }}</button>
+        <div class="vca-center">
+            <vca-cancel-button :placeholder="$t('actions.close')" @click="resetCurrent" />
+        </div>
+
     </div>
 </template>
 <script>
@@ -125,8 +153,8 @@ export default {
         setContentImage(e) {
             this.contentImage = e
         },
-        close() {
-            this.$store.commit('paymentwidget/current', null)
+        resetCurrent() {
+            this.$store.commit("paymentwidget/current", null)
         },
         submit() {
             this.$store.dispatch({type: 'paymentwidget/update'})

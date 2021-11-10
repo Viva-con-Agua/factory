@@ -3,12 +3,12 @@
         <vca-card>
             <h2>{{ $t('page.apps') }}</h2>
 
-            <vca-accordion :header="$t('page.app.insert')">
+            <vca-accordion :header="$t('app.title.insert')">
                 <div slot="body">
                     <InsertApp/>
                 </div>
             </vca-accordion>
-            <vca-accordion :header="$t('page.app.list')">
+            <vca-accordion :header="$t('app.title.list')">
                 <div slot="body">
                     <ListApps />
                     

@@ -23,6 +23,13 @@ const routes = [
 
     },
     {
+        path: '/company',
+        name: 'Company',
+        component: loadView('CompanyView'),
+        meta: {requiresAuth: true}
+
+    },
+    {
         path: '/payment-widget',
         name: 'PaymentWidget',
         component: loadView('PaymentWidgetPage'),

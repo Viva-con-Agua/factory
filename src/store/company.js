@@ -1,49 +1,30 @@
 import api from './api.js'
 import pagination from './pagination.js'
 
-const job = {
+const company = {
     namespaced: true,
     modules: {
         pg: pagination
     },
     state: () => ({
-        list: null,
         current: null,
         create: {
-            name: null,
-            case: null,
-            scope: null,
-            template: [                
-                {
-                    case: null,
-                    country: null,
-                    html: null,
-                    subject: null
-                }
-            ],
-            email_id: null
-        }
+            name: "",
+            country: "",
+            stripe_public_key: "",
+            stripe_private_key:"",
+            paypal_client_id:"",
+            paypal_secret: ""
+        },
     }),
-    mutations: {
-        list(state, value) {
-            state.list = value
-        },
-        current(state, value) {
-            state.current = value
-        },
-        create(state, value) {
-            state.create = value
-        }
-    },
     getters: {
-        list(state) {
-            return state.list
-        },
         current(state) {
             return state.current
-        },
-        create(state) {
-            return state.create
+        }
+    },
+    mutations: {
+        current(state, value) {
+            state.current = value
         }
     },
     actions: {
@@ -57,7 +38,7 @@ const job = {
         },
         create({commit, state}) {
             return new Promise((resolve, reject) => {
-               api.call.post('/v1/email/jobs', state.create)
+               api.call.post('/v1/donations/company', state.create)
                     .then((response) => {commit('current', response.data.payload), resolve()})
                     .catch(error => {
                         reject(error)
@@ -66,7 +47,7 @@ const job = {
         },
         updateReq({commit, state}) {
             return new Promise((resolve, reject) => {
-               api.call.put('/v1/email/jobs', state.current)
+               api.call.put('/v1/donations/company', state.current)
                     .then((response) => {commit('current', response.data.payload), resolve()})
                     .catch(error => {
                         reject(error)
@@ -75,7 +56,7 @@ const job = {
         },
         list({commit}) {
             return new Promise((resolve, reject) => {
-                api.call.get('/v1/email/jobs')
+                api.call.get('/v1/donations/company')
                     .then((response) => {commit('list', response.data.payload), resolve()})
                     .catch((error) => {
                         reject(error)
@@ -84,8 +65,6 @@ const job = {
         }
     }
 
-
-
 }
-export default job
 
+export default company

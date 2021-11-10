@@ -62,6 +62,7 @@ const campaign = {
     },
     actions: {
         async add ({dispatch}) {
+            console.log("create")
             await dispatch({type: 'create'})
             await dispatch({type: 'list'})
         },
@@ -72,8 +73,12 @@ const campaign = {
         create({commit, state}) {
             return new Promise((resolve, reject) => {
                api.call.post('/v1/moves/campaign', state.create)
-                    .then((response) => {commit('current', response.data.payload), resolve()})
+                    .then((response) => {
+                        commit('current', response.data.payload)
+                        commit('currentMsg', state.msg.success.created, {root: true}), 
+                        resolve()})
                     .catch(error => {
+                        commit('currentMsg', state.msg.success.error, {root: true}), 
                         reject(error)
                     })
             }) 
