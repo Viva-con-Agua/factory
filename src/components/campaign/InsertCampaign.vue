@@ -46,13 +46,11 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 //import ImageUpload from '@/components/campaign/ImageUpload.vue'
-import VcaInputDate from '@/../../vca-ui/src/form/VcaDate.vue'
 
 export default {
     name: 'InsertCampaign',
     components: {
   //      ImageUpload
-        VcaInputDate
     },
     data() {
         return {
