@@ -12,14 +12,14 @@
                 <col width="1%" />
             </colgroup>
             <thead>
-                <table-header-pagination :placeholder="$t('app.list.name.search')" :store="store" :colspan="colspan" />
+                <table-header-pagination :placeholder="$t('app.list.search')" :store="store" :colspan="colspan" />
 
                 <tr class="vca-table-header">
                     <th class="vca-table-cell sortable" @click="sort('id')"><label>{{ $t('app.list.id') }} &varr;</label></th>
                     <th class="vca-table-cell sortable" @click="sort('name')"><label> {{ $t('app.list.name') }} &varr;</label></th>
                     <th class="vca-table-cell sortable" @click="sort('redirect_url')"><label>{{ $t('app.list.redirect_url') }} &varr;</label></th>
                     <th class="vca-table-cell sortable" @click="sort('logout_url')"><label>{{ $t('app.list.logout_url') }} &varr;</label></th>
-                    <th class="vca-table-cell"><label>{{ $t('table.options') }}</label></th>
+                    <th class="vca-table-cell"><label>{{ $t('table.header.options') }}</label></th>
                 </tr>
 
             </thead>
@@ -35,7 +35,7 @@
                     <td class="vca-table-cell"><label><img class="editable" src="@/assets/icons/edit.png" title="Edit" alt="Edit"/></label></td>
                 </tr>
                 <tr class="vca-table-row last" v-if="getList().length == 0">
-                    <td :colspan="colspan"><p class="text-center">{{ $t('ranking.runner.no_results') }}</p></td>
+                    <td :colspan="colspan"><p class="text-center">{{ $t('table.page.no_results') }}</p></td>
                 </tr>
 
                 <table-border :colspan="colspan"/>
@@ -82,7 +82,7 @@
                     </td>
                 </tr>
                 <tr class="vca-table-row last" v-if="getList().length == 0">
-                    <td><p class="text-center">{{ $t('ranking.runner.no_results') }}</p></td>
+                    <td><p class="text-center">{{ $t('table.page.no_results') }}</p></td>
                 </tr>
 
                 <table-border/>

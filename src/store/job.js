@@ -1,10 +1,12 @@
 import api from './api.js'
 import pagination from './pagination.js'
+import msg from './messages.js'
 
 const job = {
     namespaced: true,
     modules: {
-        pg: pagination
+        pg: pagination,
+        msg: msg
     },
     state: () => ({
         list: null,
@@ -58,8 +60,12 @@ const job = {
         create({commit, state}) {
             return new Promise((resolve, reject) => {
                api.call.post('/v1/email/jobs', state.create)
-                    .then((response) => {commit('current', response.data.payload), resolve()})
+                    .then(() => {
+                        commit('currentMsg', state.msg.job.success.created, {root: true}),
+                        resolve()
+                    })
                     .catch(error => {
+                        commit('currentMsg', state.msg.job.error.created, {root: true}),
                         reject(error)
                     })
             }) 
@@ -67,8 +73,13 @@ const job = {
         updateReq({commit, state}) {
             return new Promise((resolve, reject) => {
                api.call.put('/v1/email/jobs', state.current)
-                    .then((response) => {commit('current', response.data.payload), resolve()})
+                    .then(() => {
+                        commit('current', null), 
+                        commit('currentMsg', state.msg.job.success.updated, {root: true}),
+                        resolve()
+                    })
                     .catch(error => {
+                        commit('currentMsg', state.msg.job.error.updated, {root: true}),
                         reject(error)
                     })
             }) 

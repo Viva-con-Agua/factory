@@ -1,19 +1,21 @@
 import api from './api.js'
 import pagination from './pagination.js'
+import msg from './messages.js'
 
 const campaign = {
     modules: {
-        pg: pagination
+        pg: pagination,
+        msg: msg
     },
     namespaced: true, 
     state: () => ({
         list: null,
         create: {
-            crm_id: 0,
+            crm_id: null,
             name: "",
             title: "",
             description:"",
-            type:"",
+            type: "",
             start_time: 0,
             end_time: 0,
             private: false,
@@ -26,31 +28,12 @@ const campaign = {
         create (state, value) {
             state.create = value
         },
-        crm_id (state, value) {
-            state.create.crm_id = Number.parseInt(value)
-        },
         current (state, value) {
             state.current = value
         },
         list (state, value) {
             state.list = value
-        },
-        start_time (state, value) {
-            state.create.start_time = value
-        },
-        end_time (state, value) {
-            state.create.end_time = value
-        },
-        header_image (state, value) {
-            state.create.header_image = value
-        },
-        content_image (state, value) {
-            state.create.content_image = value
-        },
-        updatetype (state, value) {
-            state.current.type = value
         }
-
     },
     getters:{
         list (state) {
@@ -62,7 +45,6 @@ const campaign = {
     },
     actions: {
         async add ({dispatch}) {
-            console.log("create")
             await dispatch({type: 'create'})
             await dispatch({type: 'list'})
         },
@@ -73,12 +55,11 @@ const campaign = {
         create({commit, state}) {
             return new Promise((resolve, reject) => {
                api.call.post('/v1/moves/campaign', state.create)
-                    .then((response) => {
-                        commit('current', response.data.payload)
-                        commit('currentMsg', state.msg.success.created, {root: true}), 
+                    .then(() => {
+                        commit('currentMsg', state.msg.event.success.created, {root: true})
                         resolve()})
                     .catch(error => {
-                        commit('currentMsg', state.msg.success.error, {root: true}), 
+                        commit('currentMsg', state.msg.event.success.error, {root: true})
                         reject(error)
                     })
             }) 
@@ -86,8 +67,13 @@ const campaign = {
         updateReq({commit, state}) {
             return new Promise((resolve, reject) => {
                api.call.put('/v1/moves/campaign', state.current)
-                    .then((response) => {commit('current', response.data.payload), resolve()})
+                    .then(() => {
+                        commit('current', null), 
+                        commit('currentMsg', state.msg.event.success.updated, {root: true})
+                        resolve()
+                    })
                     .catch(error => {
+                        commit('currentMsg', state.msg.event.error.updated, {root: true})                       
                         reject(error)
                     })
             }) 

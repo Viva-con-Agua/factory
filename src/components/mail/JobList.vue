@@ -1,22 +1,26 @@
 <template>
     <div class="table-container">
-        <h3>{{ $t('joblist.label') }}</h3>
-        <p v-html="$t('joblist.description')"></p>
+        <h3>{{ $t('email.jobs.list.label') }}</h3>
+        <p v-html="$t('email.jobs.list.description')"></p>
         <table class="table-desktop">
             <colgroup>
-                <col width="33%" />
-                <col width="33%" />
-                <col width="33%" />
+                <col width="20%" />
+                <col width="20%" />
+                <col width="20%" />
+                <col width="20%" />
+                <col width="20%" />
                 <col width="1%" />
             </colgroup>
             <thead>
-                <table-header-pagination :placeholder="$t('joblist.search')" :store="store" :colspan="colspan" />
+                <table-header-pagination :placeholder="$t('email.jobs.list.search')" :store="store" :colspan="colspan" />
 
                 <tr class="vca-table-header">
-                    <th class="vca-table-cell sortable" @click="sort('name')"><label>{{ $t('joblist.name') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('case')"><label> {{ $t('joblist.case') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('scope')"><label>{{ $t('joblist.scope') }} &varr;</label></th>
-                    <th class="vca-table-cell"><label>{{ $t('table.options') }}</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('id')"><label>{{ $t('table.header.uuid') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('name')"><label>{{ $t('email.jobs.list.name') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('case')"><label> {{ $t('email.jobs.list.case') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('scope')"><label>{{ $t('email.jobs.list.scope') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('template_count')"><label>{{ $t('email.jobs.list.templates') }} &varr;</label></th>
+                    <th class="vca-table-cell"><label>{{ $t('table.header.options') }}</label></th>
                 </tr>
 
             </thead>
@@ -25,13 +29,15 @@
                 <table-border :colspan="colspan"/>
 
                 <tr class="vca-table-row editable" @click="setCurrent(res)" :class="{last: (index + 1 == pg.pageSize)}" v-for="(res, index) in getList()" :key="index">
+                    <td class="vca-table-cell"><label> {{ res.id }} </label></td>
                     <td class="vca-table-cell"><label> {{ res.name }} </label></td>
                     <td class="vca-table-cell"><label> {{ res.case }} </label></td>
                     <td class="vca-table-cell"><label> {{ res.scope }} </label></td>
-                    <td class="vca-table-cell"><label> <button class="vca-button-small">{{ $t('table.edit') }}</button></label></td>
+                    <td class="vca-table-cell"><label> {{ res.template_count }} <div class="inline-infobox" style="color: black;"><vca-info-box>{{ getTemplates(res) }}</vca-info-box></div></label></td>
+                    <td class="vca-table-cell"><label><img class="editable" src="@/assets/icons/edit.png" title="Edit" alt="Edit"/></label></td>
                 </tr>
                 <tr class="vca-table-row last" v-if="getList().length == 0">
-                    <td :colspan="colspan"><p class="text-center">{{ $t('table.no_results') }}</p></td>
+                    <td :colspan="colspan"><p class="text-center">{{ $t('table.page.no_results') }}</p></td>
                 </tr>
 
                 <table-border :colspan="colspan"/>
@@ -46,15 +52,15 @@
                 <col width="100%" />
             </colgroup>
             <thead>
-                <table-search :store="store" :placeholder="$t('joblist.search')" />
+                <table-search :store="store" :placeholder="$t('email.jobs.list.search')" />
 
                 <tr class="vca-table-nav">
                     <td class="text-right vca-table-sort vca-table-nav-cell">
                         <div class="vca-row text-center">
                             <div><img src="~@/assets/icons/sort.png"></div>
-                            <div class="sortable" @click="sort('name')"><label>{{ $t('joblist.name') }}</label></div>
-                            <div class="sortable" @click="sort('case')"><label>{{ $t('joblist.case') }}</label></div>
-                            <div class="sortable" @click="sort('scope')"><label>{{ $t('joblist.scope') }}</label></div>
+                            <div class="sortable" @click="sort('name')"><label>{{ $t('email.jobs.list.name') }}</label></div>
+                            <div class="sortable" @click="sort('case')"><label>{{ $t('email.jobs.list.case') }}</label></div>
+                            <div class="sortable" @click="sort('scope')"><label>{{ $t('email.jobs.list.scope') }}</label></div>
                         </div>
                     </td>
                 </tr>
@@ -80,7 +86,7 @@
                     </td>
                 </tr>
                 <tr class="vca-table-row last" v-if="getList().length == 0">
-                    <td><p class="text-center">{{ $t('joblist.no_results') }}</p></td>
+                    <td><p class="text-center">{{ $t('table.page.no_results') }}</p></td>
                 </tr>
 
                 <table-border/>
@@ -97,7 +103,7 @@ export default {
     name: 'ListApps',
         data() {
         return {
-            colspan: 5,
+            colspan: 6,
             store: 'mail/job/pg'
         }
     },
@@ -123,6 +129,9 @@ export default {
         })
     },
     methods: {
+        getTemplates(job) {
+            return job.templates.map(a => a.country).join(', ')
+        },
         setCurrent(value) {
             if (this.current && this.current.id == value.id) {
                 this.$store.commit("mail/job/current", null)
@@ -147,6 +156,8 @@ export default {
             filteredList = filteredList.filter((row, index) => {
                 // Add a rank to the current entry
                 row.rank = index + 1
+
+                row.template_count = row.templates.length
                 // If the filter is empty, everything is fine
                 if(!this.pg.filter || this.pg.filter == '') {
                     return true

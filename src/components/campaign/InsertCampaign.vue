@@ -2,8 +2,8 @@
     <div>
         <vca-number
             ref="crm_id"
-            :errorMsg="$t('event.insert.error.crm_id')"
-            :placeholder="$t('event.insert.placeholder.crm_id')"
+            :errorMsg="$t('events.insert.error.crm_id')"
+            :placeholder="$t('events.insert.placeholder.crm_id')"
             :max="Infinity"
             :min="1"
             v-model.trim="create.crm_id"
@@ -11,34 +11,34 @@
         </vca-number>
         <vca-input
             ref="name"
-            :errorMsg="$t('event.insert.error.name')"
-            :placeholder="$t('event.insert.placeholder.name')"
+            :errorMsg="$t('events.insert.error.name')"
+            :placeholder="$t('events.insert.placeholder.name')"
             v-model.trim="create.name"
             :rules="$v.create.name">
         </vca-input>
         <vca-input
             ref="title"
-            :errorMsg="$t('event.insert.error.title')"
-            :placeholder="$t('event.insert.placeholder.title')"
+            :errorMsg="$t('events.insert.error.title')"
+            :placeholder="$t('events.insert.placeholder.title')"
             v-model.trim="create.title"
             :rules="$v.create.title">
         </vca-input>
         <vca-textarea
             ref="description"
-            :errorMsg="$t('event.insert.error.description')"
-            :placeholder="$t('event.insert.placeholder.description')"
+            :errorMsg="$t('events.insert.error.description')"
+            :placeholder="$t('events.insert.placeholder.description')"
             v-model="create.description"
             :rules="$v.create.description">
         </vca-textarea>
         <vca-field-row>
-            <vca-input-date first ref="start_time" v-model="create.start_time" :errorMsg="$t('event.insert.error.start_time')" :rules="$v.create.start_time" format="dd.MM.yyyy" :placeholder="$t('event.insert.placeholder.start_time')"/>
-            <vca-input-date last ref="end_time" v-model="create.end_time" :errorMsg="$t('event.insert.error.end_time')" :rules="$v.create.end_time" format="dd.MM.yyyy" :placeholder="$t('event.insert.placeholder.end_time')"/>
+            <vca-input-date first ref="start_time" v-model="create.start_time" :errorMsg="$t('events.insert.error.start_time')" :rules="$v.create.start_time" format="dd.MM.yyyy" :placeholder="$t('events.insert.placeholder.start_time')"/>
+            <vca-input-date last ref="end_time" v-model="create.end_time" :errorMsg="$t('events.insert.error.end_time')" :rules="$v.create.end_time" format="dd.MM.yyyy" :placeholder="$t('events.insert.placeholder.end_time')"/>
         </vca-field-row>
         <vca-checkbox v-model="create.private" >
-            <span v-html="$t('event.insert.placeholder.private')"></span><br/>
+            <span v-html="$t('events.insert.placeholder.private')"></span><br/>
         </vca-checkbox>
 
-        <vca-dropdown ref="type" v-model="create.type" :options="event_types" :title="$t('event.insert.type.title')" :placeholder="$t('event.insert.placeholder.type')" label=""/>
+        <vca-dropdown ref="type" v-model="event_type" :options="event_types" :title="$t('events.insert.type.title')" :placeholder="$t('events.insert.placeholder.type')" label=""/>
 
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.create') }}</button>
     </div>
@@ -46,16 +46,19 @@
 <script>
 import { required } from 'vuelidate/lib/validators'
 //import ImageUpload from '@/components/campaign/ImageUpload.vue'
+import VcaInputDate from '@/../../vca-ui/src/form/VcaDate.vue'
+
 export default {
     name: 'InsertCampaign',
     components: {
   //      ImageUpload
+        VcaInputDate
     },
     data() {
         return {
             event_types: [
-                {"title":"Run4WATER", "label":"Run4WATER", "subtitle": this.$t('event.insert.type.option.run') ,"value":"run"},
-                {"title":"Ride4WATER", "label":"Ride4WATER", "subtitle": this.$t('event.insert.type.option.ride'),"value":"ride"}
+                {"title":"Run4WATER", "label":"Run4WATER", "subtitle": this.$t('events.insert.type.option.run') ,"value":"run"},
+                {"title":"Ride4WATER", "label":"Ride4WATER", "subtitle": this.$t('events.insert.type.option.ride'),"value":"ride"}
             ]
 
         }
@@ -69,52 +72,13 @@ export default {
                 this.$store.commit('campaign/create', value)
             }
         },
-        type: {
+        event_type: {
             get () {
-                return this.event_types.find(el => el.value == this.$store.state.campaign.create.type)
+                let ev = this.event_types.find(el => el.value == this.$store.state.campaign.create.type)
+                return ev ? [ev] : []
             },
             set (value) {
-                this.$store.commit('campaign/type', value[0].value)
-            }
-        },
-        header_image: {
-            get () {
-                return this.$store.campaign.header_image
-            },
-            set (value) {
-                this.$store.commit('campaign/header_image', value)
-            }
-        },
-        content_image: {
-            get () {
-                return this.$store.campaign.content_image
-            },
-            set (value) {
-                this.$store.commit('campaign/content_image', value)
-            }
-        },
-        crm_id: {
-            get () {
-                return this.$store.state.campaign.create.crm_id.toString()  
-            },
-            set (value) {
-                this.$store.commit('campaign/crm_id', value)
-            }
-        },
-        start_time: {
-            get () {
-                return this.$store.state.campaign.create.start_time
-            },
-           set (value) {
-                this.$store.commit('campaign/start_time', value)
-            }
-        },
-        end_time: {
-            get () {
-                return this.$store.state.campaign.create.end_time
-            },
-            set (value) {
-                this.$store.commit('campaign/end_time', value)
+                this.$store.state.campaign.create.type = value[0].value
             }
         }
     },
@@ -132,7 +96,6 @@ export default {
     methods: {
         validate() {
             if (this.$v.$invalid) {
-                alert("")
                 this.$refs.crm_id.validate()
                 this.$refs.name.validate()
                 this.$refs.title.validate()

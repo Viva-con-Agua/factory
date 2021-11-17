@@ -161,7 +161,7 @@ export default {
   },
   computed: {
     ...mapGetters({
-      session: 'session',
+      session: 'session/session',
       current: 'navigation/current',
       tabs: 'navigation/tabs'
     })

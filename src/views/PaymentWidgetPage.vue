@@ -3,14 +3,13 @@
         <vca-card>
             <h2>{{ $t('page.paymentwidget') }}</h2>
 
-            <vca-accordion :header="$t('page.paymentwidget.insert')">
+            <vca-accordion :header="$t('paymentwidget.title.insert')">
                 <div slot="body">
                     <InsertPaymentWidget/>
                 </div>
             </vca-accordion>
-            <vca-accordion :header="$t('page.paymentwidget.list')">
+            <vca-accordion :header="$t('paymentwidget.title.list')">
                 <div slot="body">
-                    <ListApps />
                      <ListPaymentWidget />
                     
                     <vca-popup v-if="current!=null" :show="current!=null" :title="$t('paymentwidget.popup.edit', {0: current.name})" @close="setCurrent()">
@@ -50,4 +49,13 @@ export default {
 }
 
 </script>
-
+<style lang="scss">
+    .input-amount {
+        @include media(large) {
+            width: 50%;
+            .vca-input-label {
+                min-width: 50%;
+            }
+        }
+    }
+</style>

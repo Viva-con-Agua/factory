@@ -2,16 +2,16 @@
     <div class="content-text">
         <vca-card>
             <h2>{{ $t('page.campaign') }}</h2>
-            <vca-accordion :header="$t('page.event.insert')">
+            <vca-accordion :header="$t('events.title.insert')">
                 <div slot="body">
                     <InsertCampaign/>
                 </div>
             </vca-accordion>
-            <vca-accordion :header="$t('page.event.list')">
+            <vca-accordion :header="$t('events.title.list')">
                 <div slot="body">
                     <ListCampaign />
                     
-                    <vca-popup v-if="current!=null" :show="current!=null" :title="$t('event.popup.edit', {0: current.name})" @close="setCurrent()">
+                    <vca-popup v-if="current!=null" :show="current!=null" :title="$t('events.popup.edit', {0: current.name})" @close="setCurrent()">
                         <UpdateCampaign />
                     </vca-popup>
                 </div>

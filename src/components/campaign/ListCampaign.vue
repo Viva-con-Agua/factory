@@ -1,7 +1,7 @@
 <template>
     <div class="table-container">
-    <h3>{{ $t('events.label') }}</h3>
-    <p v-html="$t('events.description')"></p>
+    <h3>{{ $t('events.list.label') }}</h3>
+    <p v-html="$t('events.list.description')"></p>
     <table class="table-desktop">
         <colgroup>
             <col width="25%" />
@@ -11,14 +11,14 @@
             <col width="1%" />
         </colgroup>
         <thead>
-            <table-header-pagination :placeholder="$t('events.name.search')" :store="store" :colspan="colspan" />
+            <table-header-pagination :placeholder="$t('events.list.search')" :store="store" :colspan="colspan" />
 
             <tr class="vca-table-header">
-                <th class="vca-table-cell sortable" @click="sort('_id')"><label>{{ $t('events.id') }} &varr;</label></th>
-                <th class="vca-table-cell sortable" @click="sort('crm_id')"><label> {{ $t('events.crm_id') }} &varr;</label></th>
-                <th class="vca-table-cell sortable" @click="sort('name')"><label>{{ $t('events.name') }} &varr;</label></th>
-                <th class="vca-table-cell sortable" @click="sort('title')"><label>{{ $t('events.title') }} &varr;</label></th>
-                <th class="vca-table-cell"><label>{{ $t('table.options') }}</label></th>
+                <th class="vca-table-cell sortable" @click="sort('_id')"><label>{{ $t('events.list.id') }} &varr;</label></th>
+                <th class="vca-table-cell sortable" @click="sort('crm_id')"><label> {{ $t('events.list.crm_id') }} &varr;</label></th>
+                <th class="vca-table-cell sortable" @click="sort('name')"><label>{{ $t('events.list.name') }} &varr;</label></th>
+                <th class="vca-table-cell sortable" @click="sort('title')"><label>{{ $t('events.list.title') }} &varr;</label></th>
+                <th class="vca-table-cell"><label>{{ $t('table.header.options') }}</label></th>
             </tr>
 
         </thead>
@@ -34,7 +34,7 @@
                 <td class="vca-table-cell"><label><img class="editable" src="@/assets/icons/edit.png" title="Edit" alt="Edit"/></label></td>
             </tr>
             <tr class="vca-table-row last" v-if="getList().length == 0">
-                <td :colspan="colspan"><p class="text-center">{{ $t('events.no_results') }}</p></td>
+                <td :colspan="colspan"><p class="text-center">{{ $t('table.page.no_results') }}</p></td>
             </tr>
 
             <table-border :colspan="colspan"/>
@@ -49,16 +49,16 @@
             <col width="100%" />
         </colgroup>
         <thead>
-            <table-search :store="store" :placeholder="$t('events.name.search')" />
+            <table-search :store="store" :placeholder="$t('events.list.search')" />
 
             <tr class="vca-table-nav">
                 <td class="text-right vca-table-sort vca-table-nav-cell">
                     <div class="vca-row text-center">
                         <div><img width="20px" src="~@/assets/icons/sort.png"></div>
-                        <div class="sortable" @click="sort('_id')"><label>{{ $t('events.id') }}</label></div>
-                        <div class="sortable" @click="sort('crm_id')"><label>{{ $t('events.crm_id') }}</label></div>
-                        <div class="sortable" @click="sort('name')"><label>{{ $t('events.name') }}</label></div>
-                        <div class="sortable" @click="sort('title')"><label>{{ $t('events.title') }}</label></div>
+                        <div class="sortable" @click="sort('_id')"><label>{{ $t('events.list.id') }}</label></div>
+                        <div class="sortable" @click="sort('crm_id')"><label>{{ $t('events.list.crm_id') }}</label></div>
+                        <div class="sortable" @click="sort('name')"><label>{{ $t('events.list.name') }}</label></div>
+                        <div class="sortable" @click="sort('title')"><label>{{ $t('events.list.title') }}</label></div>
                     </div>
                 </td>
             </tr>
@@ -81,7 +81,7 @@
                 </td>
             </tr>
             <tr class="vca-table-row last" v-if="getList().length == 0">
-                <td><p class="text-center">{{ $t('events.no_results') }}</p></td>
+                <td><p class="text-center">{{ $t('table.page.no_results') }}</p></td>
             </tr>
 
             <table-border/>

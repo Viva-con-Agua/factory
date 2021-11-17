@@ -28,10 +28,25 @@ const session = {
                 return true
             }
         }
-
     },
     actions:{
-
+        loadSession ({commit}){
+            return new Promise((resolve, reject) => {
+                var token = JSON.parse(localStorage.getItem("access"))
+                try {
+                    if (token !== null) {
+                        var user = api.parseJwt(token).user
+                        commit('user/login', user, {root: true})
+                        resolve()
+                    } else {
+                        reject()
+                    }                    
+                } catch(err) {
+                    console.log(err)
+                    reject()
+                }
+            })
+        },
         setItem (key, value) {
             return Promise.resolve().then(function () {
                 localStorage.setItem(key, value);
@@ -49,6 +64,8 @@ const session = {
                     .then(response => {
                         localStorage.setItem('access', response.data.access_token)
                         localStorage.setItem('refresh', response.data.refresh_token)
+                        var user = api.parseJwt(response.data.access_token).user
+                        commit("user", user)
                         resolve()
                     })
                     .catch(error => {

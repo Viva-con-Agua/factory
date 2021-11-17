@@ -5,22 +5,22 @@
 
 
             <vca-tabs>
-                <vca-tab :title="$t('email.jobs.title')" selected="true">
+                <vca-tab :title="$t('email.title.jobs')" selected="true">
 
-                    <vca-accordion :header="$t('email.jobs.insert')">
+                    <vca-accordion :header="$t('email.jobs.title.insert')">
                         <div slot="body">
                             <InsertJob/>
                         </div>
                     </vca-accordion>
 
 
-                    <vca-accordion :header="$t('email.jobs.list')">
+                    <vca-accordion :header="$t('email.jobs.title.list')">
                         <div slot="body">
 
                             <JobList/>
 
 
-                            <vca-popup v-if="current!=null" :show="current!=null" :title="$t('event.popup.edit', {0: current.name})" @close="setCurrent()">
+                            <vca-popup v-if="current!=null" :show="current!=null" :title="$t('email.jobs.popup.edit', {0: current.name})" @close="setCurrent()">
                                 <JobUpdate />
                             </vca-popup>
                         </div>
@@ -28,9 +28,9 @@
 
 
                 </vca-tab>
-                <vca-tab :title="$t('email.addresses.title')">
+                <vca-tab :title="$t('email.title.addresses')">
 
-                    <vca-accordion :header="$t('email.addresses.isert')">
+                    <vca-accordion :header="$t('email.address.title.insert')">
                         <div slot="body">
                             <InsertEmail />
                         </div>

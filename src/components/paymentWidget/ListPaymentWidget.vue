@@ -1,8 +1,8 @@
 <template>
     <div class="table-container">
 
-        <h3>{{ $t('ranking.runner.label') }}</h3>
-        <p v-html="$t('ranking.runner.description')"></p>
+        <h3>{{ $t('paymentwidget.list.label') }}</h3>
+        <p v-html="$t('paymentwidget.list.description')"></p>
         <table class="table-desktop">
             <colgroup>
                 <col width="20%" />
@@ -13,14 +13,14 @@
                 <col width="1%" />
             </colgroup>
             <thead>
-                <table-header-pagination :placeholder="$t('paymentwidget.name.search')" :store="store" :colspan="colspan" />
+                <table-header-pagination :placeholder="$t('paymentwidget.list.search')" :store="store" :colspan="colspan" />
 
                 <tr class="vca-table-header">
-                    <th class="vca-table-cell sortable" @click="sort('id')"><label>{{ $t('paymentwidget.id') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('name')"><label> {{ $t('paymentwidget.name') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('description')"><label>{{ $t('paymentwidget.description') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('default_amount')"><label>{{ $t('paymentwidget.default_amount') }} &varr;</label></th>
-                    <th class="vca-table-cell sortable" @click="sort('min_amount')"><label>{{ $t('paymentwidget.min_amount') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('id')"><label>{{ $t('paymentwidget.list.id') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('name')"><label> {{ $t('paymentwidget.list.name') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('description')"><label>{{ $t('paymentwidget.list.description') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('default_amount')"><label>{{ $t('paymentwidget.list.default_amount') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('min_amount')"><label>{{ $t('paymentwidget.list.min_amount') }} &varr;</label></th>
                     <th class="vca-table-cell"><label>{{ $t('table.options') }}</label></th>
                 </tr>
 
@@ -38,7 +38,7 @@
                     <td class="vca-table-cell"><label><img class="editable" src="@/assets/icons/edit.png" title="Edit" alt="Edit"/></label></td>
                 </tr>
                 <tr class="vca-table-row last" v-if="getList().length == 0">
-                    <td :colspan="colspan"><p class="text-center">{{ $t('ranking.runner.no_results') }}</p></td>
+                    <td :colspan="colspan"><p class="text-center">{{ $t('table.page.no_results') }}</p></td>
                 </tr>
 
                 <table-border :colspan="colspan"/>
@@ -59,11 +59,11 @@
                     <td class="text-right vca-table-sort vca-table-nav-cell">
                         <div class="vca-row text-center">
                             <div><img width="20px" src="~@/assets/icons/sort.png"></div>
-                            <div class="sortable" @click="sort('id')"><label>{{ $t('paymentwidget.id') }}</label></div>
-                            <div class="sortable" @click="sort('name')"><label>{{ $t('paymentwidget.name') }}</label></div>
-                            <div class="sortable" @click="sort('description')"><label>{{ $t('paymentwidget.description') }}</label></div>
-                            <div class="sortable" @click="sort('default_amount')"><label>{{ $t('paymentwidget.default_amount') }}</label></div>
-                            <div class="sortable" @click="sort('min_amount')"><label>{{ $t('paymentwidget.min_amount') }}</label></div>
+                            <div class="sortable" @click="sort('id')"><label>{{ $t('paymentwidget.list.id') }}</label></div>
+                            <div class="sortable" @click="sort('name')"><label>{{ $t('paymentwidget.list.name') }}</label></div>
+                            <div class="sortable" @click="sort('description')"><label>{{ $t('paymentwidget.list.description') }}</label></div>
+                            <div class="sortable" @click="sort('default_amount')"><label>{{ $t('paymentwidget.list.default_amount') }}</label></div>
+                            <div class="sortable" @click="sort('min_amount')"><label>{{ $t('paymentwidget.list.min_amount') }}</label></div>
                         </div>
                     </td>
                 </tr>
@@ -86,7 +86,7 @@
                     </td>
                 </tr>
                 <tr class="vca-table-row last" v-if="getList().length == 0">
-                    <td><p class="text-center">{{ $t('ranking.runner.no_results') }}</p></td>
+                    <td><p class="text-center">{{ $t('table.page.no_results') }}</p></td>
                 </tr>
 
                 <table-border/>

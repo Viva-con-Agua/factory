@@ -19,6 +19,26 @@ export default new Vuex.Store({
         navigation: navigation,
         paymentwidget: paymentwidget,
     },
+    state: {
+        loading: false,
+        currentMsg: null
+    },
+    mutations: {
+        currentMsg (state, value) {
+            state.currentMsg = value
+        },
+        loadingFlow(state) {
+            state.loading = !state.loading
+        }
+    },
+    getters: {
+        currentMsg (state) {
+            return state.currentMsg
+        },
+        loadingFlow (state) {
+            return state.loading
+        }
+    },
     actions: {
         async mailView({dispatch}) {
             await dispatch('mail/job/list')

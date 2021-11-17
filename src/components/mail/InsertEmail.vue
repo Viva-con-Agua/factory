@@ -2,40 +2,40 @@
     <div>
         <vca-input
             ref="email"
-            :errorMsg="$t('mail.insert.error.email')"
-            :placeholder="$t('mail.insert.placeholder.email')"
+            :errorMsg="$t('email.address.insert.error.email')"
+            :placeholder="$t('email.address.insert.placeholder.email')"
             v-model.trim="create.email"
             :rules="$v.create.email">
         </vca-input>
         <vca-input
             ref="password"
-            :errorMsg="$t('mail.insert.error.password')"
-            :placeholder="$t('mail.insert.placeholder.password')"
+            :errorMsg="$t('email.address.insert.error.password')"
+            :placeholder="$t('email.address.insert.placeholder.password')"
             v-model.trim="create.password"
             :rules="$v.create.password">
         </vca-input>
         <vca-input
             ref="password1"
-            :errorMsg="$t('mail.insert.error.password1')"
-            :placeholder="$t('mail.insert.placeholder.password1')"
+            :errorMsg="$t('email.address.insert.error.password1')"
+            :placeholder="$t('email.address.insert.placeholder.password1')"
             v-model.trim="create.password1"
             :rules="$v.create.password1">
         </vca-input>
         <vca-input
             ref="host"
-            :errorMsg="$t('mail.insert.error.host')"
-            :placeholder="$t('mail.insert.placeholder.host')"
+            :errorMsg="$t('email.address.insert.error.host')"
+            :placeholder="$t('email.address.insert.placeholder.host')"
             v-model.trim="create.host"
             :rules="$v.create.host">
         </vca-input>
         <vca-number
             ref="port"
-            :errorMsg="$t('mail.insert.error.port')"
-            :placeholder="$t('mail.insert.placeholder.port')"
+            :errorMsg="$t('email.address.insert.error.port')"
+            :placeholder="$t('email.address.insert.placeholder.port')"
             v-model.trim="create.port"
             :rules="$v.create.port">
         </vca-number>
-        <vca-dropdown :placeholder="$t('mail.insert.placeholder.scope')" />
+        <vca-dropdown :placeholder="$t('email.address.insert.placeholder.scope')" />
 
         <div class="vca-row">
                           

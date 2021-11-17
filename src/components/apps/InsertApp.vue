@@ -60,7 +60,6 @@ export default {
     computed: {
         create: {
             get () {
-                console.log("change")
                 return this.$store.state.app.create
             },
             set (value) {

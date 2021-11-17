@@ -40,6 +40,26 @@
         "unknown": "Es ist ein unbekannter Fehler aufgetreten.",
         "unauth": "Du bist gerade nicht richtig eingeloggt!"
       }
+    },
+    "app": {
+      "success": {
+        "created": "Die Anwendungen wurde erfolgreich angelegt!",
+        "updated": "Die Anwendungen wurde erfolgreich aktualisiert!"
+      },
+      "error": {
+        "created": "Die Anwendungen konnte nicht angelegt werden!",
+        "updated": "Die Anwendungen konnte nicht aktualisiert werden!"
+      }
+    },
+    "event": {
+      "success": {
+        "created": "Das Event wurde erfolgreich angelegt!",
+        "updated": "Das Event wurde erfolgreich aktualisiert!"
+      },
+      "event": {
+        "created": "Das Event konnte nicht angelegt werden!",
+        "updated": "Das Event konnte nicht aktualisiert werden!"
+      }
     }
   },
   "actions": {
@@ -68,6 +88,30 @@
       "contact": "Kontakt"
     }
   },
+  "table": {
+    "header": {
+      "uuid": "UUID",
+      "name": "Name",
+      "title": "Titel",
+      "start": "Start",
+      "end": "Ende",
+      "type": "Typ",
+      "access": "Berechtigung",
+      "description": "Beschreibung",
+      "created": "Erstellt",
+      "options": "",
+      "private": "Privat"
+    },
+    "page": {
+      "label": "Seite",
+      "size": "Einträge",
+      "first": "Erste Einträge",
+      "back": "Vorherige Einträge",
+      "next": "Nächste Einträge",
+      "last": "Letze Einträge",
+      "no_results": "Es wurden leider keine Einträge gefunden"
+    }
+  },
   "page": {
     "apps": "Apps & URLs",
     "email": "E-Mails & Jobs",
@@ -79,6 +123,15 @@
     "title": {
       "insert": "App anlegen",
       "list": "Apps anzeigen und bearbeiten"
+    },
+    "list": {
+      "label": "Angelegte Anwendungen",
+      "description": "Hier werden alle angelegten Web-Anwendungen angezeigt. Die Berechtigungen der einzelnen Anwendungen werden beim Klick auf die Anwendungen angezeigt",
+      "id": "UUID",
+      "name": "Name",
+      "redirect_url": "Redirect URL",
+      "logout_url": "Logout URL",
+      "search": "Nach einer Anwendungen suchen"
     },
     "popup": {
       "edit": "App \"{0}\" bearbeiten"
@@ -107,13 +160,26 @@
       }
     }
   },
-  "event": {
+  "events": {
+    "title": {
+      "insert": "Event anlegen",
+      "list": "Events anzeigen und bearbeiten"
+    },
+    "list": {
+      "label": "Angelegte Events",
+      "description": "Hier werden alle bisher angelegten Events angezeigt.",
+      "id": "UUID",
+      "crm_id": "CRM ID",
+      "name": "Name",
+      "title": "Title",
+      "search": "Nach einem Event suchen"
+    },
     "popup": {
       "edit": "Event \"{0}\" bearbeiten"
     },
     "insert": {
       "placeholder": {
-        "crm_id": "ID der Kampagne",
+        "crm_id": "ID der Kampagne im CRM",
         "name": "Name des Events (z.B. run4WATER 2021)",
         "title": "Titel des Events (z.B. Laufen für unsere Projekte zum Weltwassertag",
         "description": "Text für das Event",
@@ -135,6 +201,202 @@
         "option": {
           "run": "Spendenlauf",
           "ride": "Spenden Radtour"
+        }
+      }
+    }
+  },
+  "paymentwidget": {
+    "title": {
+      "insert": "Formular anlegen",
+      "list": "Formulare anzeigen und bearbeiten"
+    },
+    "paymenttype": {
+      "civisepa": {
+        "label": "SEPA (CiviCRM)",
+        "title": "SEPA (CiviCRM)",
+        "subtitle": "SEPA Einzug via CiviCRM"
+      },
+      "sepa": {
+        "label": "SEPA",
+        "title": "SEPA",
+        "subtitle": "SEPA Einzug via Stripe"
+      },
+      "creditcard": {
+        "label": "Kreditkarte",
+        "title": "Kreditkarte",
+        "subtitle": "Kreditkarten Einzug via Stripe"
+      },
+      "paypal": {
+        "label": "Paypal",
+        "title": "Paypal",
+        "subtitle": "Einzug via Paypal"
+      }
+    },
+    "list": {
+      "label": "Angelegte Formulare",
+      "description": "Hier werden alle bisher angelegten Spenden- und Mitgliedsformulare angezeigt.",
+      "id": "UUID",
+      "crm_id": "CRM ID",
+      "name": "Name",
+      "description": "Beschreibung",
+      "default_amount": "Standardbetrag",
+      "min_amount": "Mindestbetrag",
+      "search": "Nach einem Formular suchen"
+    },
+    "popup": {
+      "edit": "Event \"{0}\" bearbeiten"
+    },
+    "insert": {
+      "topText": {
+        "min_amount": "Mindestbetrag",
+        "default_amount": "Standardbetrag"
+      },
+      "placeholder": {
+        "crm_id": "ID der Kampagne im CRM",
+        "name": "Name des Formulars",
+        "description": "Beschreibung des Formulars",
+        "payment_types": "Zahlungsarten für Einmalspende",
+        "subscription_types": "Zahlungsarten für Dauerspende",
+        "pay_day": "Tag des Zahlungseinzugs",
+        "company_id": "UUD des verknüpften Unternehmens",
+        "default_amount": "Standardbetrag",
+        "min_amount": "Mindestbetrag"
+      },
+      "label": {
+        "payment_types": "Zahlungsarten für Einmalspende",
+        "subscription_types": "Zahlungsarten für Dauerspende"
+      },
+      "error": {
+        "crm_id": "Bitte gib eine Kampagnen ID an",
+        "name": "Bitte gib einen Namen ein",
+        "title": "Bitte gib einen Titel ein",
+        "description": "Bitte gib einen Text ein",
+        "start_time": "Bitte gib ein Startdatum an",
+        "end_time": "Bitte gib ein Enddatum an",
+        "type": "Bitte gib die Art des Events an"
+      },
+      "type": {
+        "option": {
+          "run": "Spendenlauf",
+          "ride": "Spenden Radtour"
+        }
+      }
+    }
+  },
+  "email": {
+    "title": {
+      "jobs": "Jobs",
+      "addresses": "E-Mail Adressen"
+    },
+    "jobs": {
+      "title": {
+        "insert": "Neuen Job anlegen",
+        "list": "Jobs anzeigen"
+      },
+      "list": {
+        "label": "Angelegte Jobs",
+        "description": "Hier werden alle bisher angelegten Jobs angezeigt.",
+        "id": "UUID",
+        "name": "Name",
+        "scope": "Scope",
+        "case": "Fall",
+        "search": "Nach einem Job suchen",
+        "templates": "Anzahl an templates"
+      },
+      "popup": {
+        "edit": "Job \"{0}\" bearbeiten"
+      },
+      "insert": {
+        "title": {
+          "name": "Name des Jobs",
+          "case": "Fall des Jobs",
+          "scope": "Scope des Jobs",
+          "email_id": "ID der genutzten Mailadresse (link)",
+          "templates": "Nachrichten-Templates",
+          "template": {
+            "case": "Fall",
+            "subject": "Betreff",
+            "country": "Land",
+            "html": "Nachricht"
+          }
+        },
+        "button": {
+          "template": {
+            "add": "Template hinzufügen"
+          }
+        },
+        "label": {
+          "name": "Name",
+          "case": "Fall",
+          "scope": "Scope",
+          "email_id": "ID der genutzten Mailadresse (link)",
+          "templates": "Template: \"{0}\"",
+          "template": {
+            "add": "Neues Template hinzufügen",
+            "case": "Fall",
+            "subject": "Betreff",
+            "country": "Land",
+            "html": "Nachricht"
+          }
+        },
+        "placeholder": {
+          "name": "Name des Jobs",
+          "case": "Fall des Jobs",
+          "scope": "Scope des Jobs",
+          "email_id": "ID der genutzten Mailadresse (link)",
+          "template": {
+            "case": "Fall",
+            "subject": "Betreff",
+            "country": "Land",
+            "html": "Nachricht"
+          }
+        },
+        "error": {
+          "name": "Bitte gib einen Namen für den Job ein",
+          "case": "Bitte gib einen Fall ein",
+          "scope": "Bitte gib den Scope des Jobs ein",
+          "email_id": "Bitte gib eine E-Mail Mailadresse an"
+        }
+      }
+    },
+    "address": {
+      "title": {
+        "insert": "Neue E-Mail Adresse anlegen",
+        "list": "E-Mail Adressen anzeigen"
+      },
+      "list": {
+      },
+      "popup": {
+        "edit": "E-Mail Adresse \"{0}\" bearbeiten"
+      },
+      "insert": {
+        "title": {
+          "email": "E-Mail Adresse",
+          "password": "Passwort",
+          "password1": "Passwort wiederholen",
+          "host": "Host",
+          "port": "Port"
+        },
+        "label": {
+          "email": "E-Mail Adresse",
+          "password": "Passwort",
+          "password1": "Passwort wiederholen",
+          "host": "Host",
+          "port": "Port"
+        },
+        "placeholder": {
+          "email": "E-Mail Adresse",
+          "password": "Passwort",
+          "password1": "Passwort wiederholen",
+          "host": "Host",
+          "port": "Port"
+        },
+        "error": {
+          "email": "Bitte gib eine E-Mail Adresse an",
+          "password": "Bitte gib ein Passwort an",
+          "password1": "Die Passwörter stimmen nicht überein",
+          "host": "Bitte gib den Host ein",
+          "port": "Bitte gib den Port ein"
         }
       }
     }
