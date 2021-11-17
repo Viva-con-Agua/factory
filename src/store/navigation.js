@@ -9,9 +9,8 @@ const navigation = {
             { title: 'navigation.tabs.campaign', route: { name: "Campaign" }, needSession: true},
             { title: 'navigation.tabs.company', route: { name: "Company" }, needSession: true},
             { title: 'navigation.tabs.paymentWidget', route: { name: "PaymentWidget" }, needSession: true},
+            { title: 'navigation.tabs.signin', route: { name: "Sign" }, needSession: false},
             { title: 'navigation.tabs.logout', route: { name: "Logout" }, needSession: true}
-
-            //{ title: 'navigation.tabs.signin', route: { name: "Sign" }, needSession: false},
         ]
     }),
     mutations: {

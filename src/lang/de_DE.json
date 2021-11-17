@@ -112,12 +112,20 @@
       "no_results": "Es wurden leider keine Einträge gefunden"
     }
   },
+  "login": {
+    "redirect": "Einen Moment, du wirst zum Login weitergeleitet...",
+    "required": "Einen Moment, du wirst weitergeleitet..."
+  },
   "page": {
     "apps": "Apps & URLs",
     "email": "E-Mails & Jobs",
     "company": "Organisationen & Unternehmen",
     "paymentwidget": "Spenden- & Mitgliedsformulare",
     "campaign": "Events & Kampagnen"
+  },
+  "overview": {
+    "welcome": "Moin {0}!",
+    "welcome": "Moin {0}!"
   },
   "app": {
     "title": {
