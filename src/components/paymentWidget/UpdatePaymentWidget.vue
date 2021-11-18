@@ -6,31 +6,31 @@
             :placeholder="$t('paymentwidget.insert.placeholder.crm_id')"
             :max="Infinity"
             :min="1"
-            v-model="create.crm_id"
-            :rules="$v.create.crm_id">
+            v-model="current.crm_id"
+            :rules="$v.current.crm_id">
         </vca-number>
         <vca-input
             ref="name"
             :errorMsg="$t('paymentwidget.insert.error.name')"
             :placeholder="$t('paymentwidget.insert.placeholder.name')"
-            v-model.trim="create.name"
-            :rules="$v.create.name">
+            v-model.trim="current.name"
+            :rules="$v.current.name">
         </vca-input>
         <vca-textarea
             ref="description"
             :errorMsg="$t('paymentwidget.insert.error.description')"
             :placeholder="$t('paymentwidget.insert.placeholder.description')"
-            v-model.trim="create.description"
-            :rules="$v.create.description">
+            v-model.trim="current.description"
+            :rules="$v.current.description">
         </vca-textarea>
         <vca-dropdown ref="type" :multiple="true" v-model="payment_type" :options="payment_types" :title="$t('paymentwidget.insert.title.payment_types')" :placeholder="$t('paymentwidget.insert.placeholder.payment_types')" :label="$t('paymentwidget.insert.label.payment_types')"/>
         <vca-dropdown ref="type" :multiple="true" v-model="subscription_type" :options="subscription_types" :title="$t('paymentwidget.insert.title.subscription_types')" :placeholder="$t('paymentwidget.insert.placeholder.subscription_types')" :label="$t('paymentwidget.insert.label.subscription_types')"/>
 
         <vca-card>
-            <vca-money-input class="input-amount" ref="min_amount" v-model="min_amount" :money="min_amount" :rules="$v.create.min_amount" :errorMsg="$t('paymentwidget.insert.errorMsg.min_amount')" :topText="$t('paymentwidget.insert.topText.min_amount')"/>
+            <vca-money-input class="input-amount" ref="min_amount" v-model="min_amount" :money="min_amount" :rules="$v.current.min_amount" :errorMsg="$t('paymentwidget.insert.errorMsg.min_amount')" :topText="$t('paymentwidget.insert.topText.min_amount')"/>
         </vca-card>
         <vca-card>
-            <vca-money-input class="input-amount" ref="default_amount" v-model="default_amount" :money="default_amount" :rules="$v.create.default_amount" :errorMsg="$t('paymentwidget.insert.errorMsg.default_amount')" :topText="$t('paymentwidget.insert.topText.default_amount')"/>
+            <vca-money-input class="input-amount" ref="default_amount" v-model="default_amount" :money="default_amount" :rules="$v.current.default_amount" :errorMsg="$t('paymentwidget.insert.errorMsg.default_amount')" :topText="$t('paymentwidget.insert.topText.default_amount')"/>
         </vca-card>
 
         <vca-number
@@ -39,59 +39,66 @@
             :placeholder="$t('paymentwidget.insert.placeholder.pay_day')"
             :max="31"
             :min="1"
-            v-model="create.pay_day"
-            :rules="$v.create.pay_day">
+            v-model="current.pay_day"
+            :rules="$v.current.pay_day">
         </vca-number>
 
         <vca-input
             ref="company_id"
             :errorMsg="$t('paymentwidget.insert.error.company_id')"
             :placeholder="$t('paymentwidget.insert.placeholder.company_id')"
-            v-model.trim="create.company_id"
-            :rules="$v.create.company_id">
+            v-model.trim="current.company_id"
+            :rules="$v.current.company_id">
         </vca-input>
-        
-        <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.create') }}</button>
+
+        <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.update') }}</button>
+        <div class="vca-center">
+            <vca-cancel-button :placeholder="$t('actions.close')" @click="resetCurrent" />
+        </div>
+
     </div>
 </template>
 <script>
 import { required } from 'vuelidate/lib/validators'
+//import ImageUpload from '@/components/campaign/ImageUpload.vue'
 export default {
-    name: 'PaymentWidgetCreate',
+    name: 'UpdatePaymentwidget',
+    components: {
+  //      ImageUpload
+    },
     data() {
-        return {
-        }
+        return {}
     },
     computed: {
-        create: {
+        current: {
             get () {
-                return this.$store.state.paymentwidget.create
+                return this.$store.state.paymentwidget.current
             },
             set (value) {
-                this.$store.commit('paymentwidget/create', value)
-            },
+                this.$store.commit('paymentwidget/current', value)
+            }
         },
         min_amount: {
             get () {
-                return {'amount': this.$store.state.paymentwidget.create.min_amount, 'currency': 'EUR'}
+                return {'amount': this.$store.state.paymentwidget.current.min_amount, 'currency': 'EUR'}
             },
             set (value) {
-                this.create.min_amount = Number.parseInt(value.amount)
-                this.$store.commit('paymentwidget/create', this.create)
+                this.current.min_amount = Number.parseInt(value.amount)
+                this.$store.commit('paymentwidget/current', this.current)
             }
         },
         default_amount: {
             get () {
-                return {'amount': this.$store.state.paymentwidget.create.default_amount, 'currency': 'EUR'}
+                return {'amount': this.$store.state.paymentwidget.current.default_amount, 'currency': 'EUR'}
             },
             set (value) {
-                this.create.default_amount = Number.parseInt(value.amount)
-                this.$store.commit('paymentwidget/create', this.create)
+                this.current.default_amount = Number.parseInt(value.amount)
+                this.$store.commit('paymentwidget/current', this.current)
             }
         },
         payment_types: {
             get () {
-                return this.$store.state.paymentwidget.create.payment_types == null ? [] : this.$store.state.paymentwidget.create.payment_types.filter((row) => {
+                return this.$store.state.paymentwidget.current.payment_types == null ? [] : this.$store.state.paymentwidget.current.payment_types.filter((row) => {
                         row.value = row.name
                         row.title = this.$t(row.title)
                         row.subtitle = this.$t(row.subtitle)
@@ -102,7 +109,7 @@ export default {
         },
         subscription_types: {
             get () {
-                return this.$store.state.paymentwidget.create.subscription_types == null ? [] : this.$store.state.paymentwidget.create.subscription_types.filter((row) => {
+                return this.$store.state.paymentwidget.current.subscription_types == null ? [] : this.$store.state.paymentwidget.current.subscription_types.filter((row) => {
                         row.value = row.name
                         row.title = this.$t(row.title)
                         row.subtitle = this.$t(row.subtitle)
@@ -113,11 +120,10 @@ export default {
         },
         payment_type: {
             get () {
-                return this.$store.state.paymentwidget.create.payment_types == null ? [] : this.$store.state.paymentwidget.create.payment_types.filter((row) => {
+                return this.$store.state.paymentwidget.current.payment_types == null ? [] : this.$store.state.paymentwidget.current.payment_types.filter((row) => {
                         let obj = this.$store.state.paymentwidget.payment_types.find(o => o.value === row.name || o.value === row.value);
 
                         if (obj == undefined) {
-                            console.log(row.name)
                             return false;
                         }
                         row.value = row.name
@@ -128,14 +134,14 @@ export default {
                     });
             },
             set (value) {
-                let newCreate = this.create
-                newCreate.payment_types = value
-                this.$store.commit('paymentwidget/create', newCreate)
+                let newCurrent = this.current
+                newCurrent.payment_types = value
+                this.$store.commit('paymentwidget/current', newCurrent)
             }
         },
         subscription_type: {
             get () {
-                return this.$store.state.paymentwidget.create.subscription_types == null ? [] : this.$store.state.paymentwidget.create.subscription_types.filter((row) => {
+                return this.$store.state.paymentwidget.current.subscription_types == null ? [] : this.$store.state.paymentwidget.current.subscription_types.filter((row) => {
                     let obj = this.$store.state.paymentwidget.subscription_types.find(o => o.value === row.name);
                     row.value = row.name
                     row.title = obj.title
@@ -145,14 +151,14 @@ export default {
                 });
             },
             set (value) {
-                let newCreate = this.create
-                newCreate.subscription_types = value
-                this.$store.commit('paymentwidget/create', newCreate)
+                let newCurrent = this.current
+                newCurrent.subscription_types = value
+                this.$store.commit('paymentwidget/current', newCurrent)
             }
         }
     },
     validations: {
-        create: {
+        current: {
             crm_id: { required },
             name: { required },
             description: { required },
@@ -174,8 +180,18 @@ export default {
                 this.submit()
             }
         },
+        setHeaderImage(e) {
+            this.headerImage = e
+        },
+        setContentImage(e) {
+            this.contentImage = e
+        },
+        resetCurrent() {
+            this.$store.commit("paymentwidget/current", null)
+        },
         submit() {
-            this.$store.dispatch({type: 'paymentwidget/add'})
+            console.log("HERE")
+            this.$store.dispatch({type: 'paymentwidget/update'})
                 .then(() => {
                     this.$emit('success')
                 })

@@ -11,8 +11,8 @@ export default {
         }
     },
     created () {
-        this.$store.commit('session/logout')
-
+        this.$store.dispatch("logout")        
+        window.location = process.env.VUE_APP_AUTH_URL + "logout?callback=" + encodeURIComponent(window.location.origin)
     }
 }
 </script>

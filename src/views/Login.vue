@@ -1,5 +1,5 @@
 <template>
-    <div class="text-center">
+    <div class="content-text text-center">
         <h1>{{ $t('login.required') }}</h1>
     </div>
 </template>
@@ -13,11 +13,17 @@ export default {
         }
     },
     created () {
-        this.$store.dispatch({type: 'session/get', code: this.code})
+        this.$store.dispatch({type: 'user/session/get', code: this.code})
             .then(() => {
-                this.$router.push({name: 'Root'})
+                if (this.callback == null || this.callback == 'null') { 
+                    this.$router.push({name: 'Overview'})
+                } else {
+                    this.$router.push({path: atob(this.callback)})
+                }
             })
-
+            .catch(()=> {
+                this.$router.push({name: 'Overview'})
+            })
     }
 }
 </script>
