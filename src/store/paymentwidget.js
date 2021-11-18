@@ -16,6 +16,7 @@ const paymentwidget = {
             description:"",
             min_amount: 500,
             default_amount: 2500,
+            company_id: "",
             payment_types: [
                 { name: 'civisepa', title: 'paymentwidget.paymenttype.sepa', default: true, },
                 { name: 'sepa', title: 'paymentwidget.paymenttype.sepa' },
