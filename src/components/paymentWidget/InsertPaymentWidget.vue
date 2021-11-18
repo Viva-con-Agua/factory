@@ -50,7 +50,7 @@
             v-model.trim="create.company_id"
             :rules="$v.create.company_id">
         </vca-input>
-
+        
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.create') }}</button>
     </div>
 </template>
