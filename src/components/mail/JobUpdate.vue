@@ -165,12 +165,9 @@ export default {
             for (const [key, value] of Object.entries(this.htmlContents)) {
                 let html = value
                 if(!value.includes('<html')) {
-                    console.log(key)
                     html = '<!DOCTYPE html><html lang="' + key + '"><head><meta charset="utf-8"></head><body>' + html + '</body></html>'
-                    console.log(html)
                 }
                 convertedHtml[key] = this.toBinary(html)
-                console.log(this.toBinary(html))
             }
 
             this.current.templates = this.current.templates.map(
