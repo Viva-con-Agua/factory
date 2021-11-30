@@ -17,6 +17,11 @@ const paymentwidget = {
             min_amount: 500,
             default_amount: 2500,
             company_id: "",
+            slider: {
+                name: "faucet",
+                min: 500,
+                max: 25000,
+            },
             payment_types: [
                 { name: 'civisepa', title: 'paymentwidget.paymenttype.sepa', default: true, },
                 { name: 'sepa', title: 'paymentwidget.paymenttype.sepa' },
@@ -42,6 +47,10 @@ const paymentwidget = {
             { name: 'sepa', title: 'paymentwidget.paymenttype.sepa.title', default: true, subtitle: 'paymentwidget.paymenttype.sepa.subtitle', label: 'paymentwidget.paymenttype.sepa.label', value: 'sepa' },
             { name: 'creditcard', title: 'paymentwidget.paymenttype.creditcard.title', default: true, subtitle: 'paymentwidget.paymenttype.creditcard.subtitle', label: 'paymentwidget.paymenttype.creditcard.label', value: 'creditcard' },
             { name: 'paypal', title: 'paymentwidget.paymenttype.paypal.title', default: true, subtitle: 'paymentwidget.paymenttype.paypal.subtitle', label: 'paymentwidget.paymenttype.paypal.label', value: 'paypal' }
+        ],
+        slider_types: [
+            { name: 'faucet', title: 'paymentwidget.slider.faucet.title', default: true, subtitle: 'paymentwidget.slider.faucet.subtitle', label: 'paymentwidget.slider.faucet.label', value: 'faucet' },
+            { name: 'cups', title: 'paymentwidget.slider.cups.title', default: true, subtitle: 'paymentwidget.slider.cups.subtitle', label: 'paymentwidget.slider.cups.label', value: 'cups' }
         ]
     }),
 
@@ -79,10 +88,12 @@ const paymentwidget = {
             await dispatch("updateReq")
             await dispatch("list")
         },
-        create({commit, state}) {
+        create({state}) {
             return new Promise((resolve, reject) => {
                api.call.post('/v1/donations/form', state.create)
-                    .then((response) => {commit('current', response.data.payload), resolve()})
+                    .then(() => {
+                        resolve()
+                    })
                     .catch(error => {
                         reject(error)
                     })
