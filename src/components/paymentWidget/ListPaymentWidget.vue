@@ -21,6 +21,9 @@
                     <th class="vca-table-cell sortable" @click="sort('description')"><label>{{ $t('paymentwidget.list.description') }} &varr;</label></th>
                     <th class="vca-table-cell sortable" @click="sort('default_amount')"><label>{{ $t('paymentwidget.list.default_amount') }} &varr;</label></th>
                     <th class="vca-table-cell sortable" @click="sort('min_amount')"><label>{{ $t('paymentwidget.list.min_amount') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('slider_min')"><label>{{ $t('paymentwidget.list.slider_min') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('slider_max')"><label>{{ $t('paymentwidget.list.slider_max') }} &varr;</label></th>
+                    <th class="vca-table-cell sortable" @click="sort('slider_steps')"><label>{{ $t('paymentwidget.list.slider_steps') }} &varr;</label></th>
                     <th class="vca-table-cell"><label>{{ $t('table.options') }}</label></th>
                 </tr>
 
@@ -33,8 +36,11 @@
                     <td class=""><label> {{ res.id }} </label></td>
                     <td class=""><label> {{ res.name }} </label></td>
                     <td class=""><label> {{ res.description }} </label></td>
-                    <td class=""><label> {{ res.default_amount }} </label></td>
-                    <td class=""><label> {{ res.min_amount }} </label></td>
+                    <td class=""><label> {{ formatAmount(res.default_amount) }} </label></td>
+                    <td class=""><label> {{ formatAmount(res.min_amount) }} </label></td>
+                    <td class=""><label> {{ formatAmount(res.slider.min) }} </label></td>
+                    <td class=""><label> {{ formatAmount(res.slider.max) }} </label></td>
+                    <td class=""><label> {{ formatAmount(res.slider.steps) }} </label></td>
                     <td class="vca-table-cell"><label><img class="editable" src="@/assets/icons/edit.png" title="Edit" alt="Edit"/></label></td>
                 </tr>
                 <tr class="vca-table-row last" v-if="getList().length == 0">
@@ -104,7 +110,7 @@ export default {
     name: 'ListPaymentWidget',
     data() {
         return {
-            colspan: 6,
+            colspan: 9,
             store: 'paymentwidget/pg'
         }
     },
@@ -137,6 +143,9 @@ export default {
             }
             
         },
+        formatAmount(value) {
+            return (value / 100).toLocaleString(this.$i18n.locale)
+        },
         getList() {
             // If the list is empty, we have an empty array
             if (!this.list) {
@@ -154,6 +163,9 @@ export default {
             filteredList = filteredList.filter((row, index) => {
                 // Add a rank to the current entry
                 row.rank = index + 1
+                row.slider_min = row.slider.min
+                row.slider_max = row.slider.max
+                row.slider_steps = row.slider.steps
 
                 // If the filter is empty, everything is fine
                 if(!this.pg.filter || this.pg.filter == '') {
@@ -205,9 +217,9 @@ export default {
 
             // Sort the list depending on the column and the direction
             this.list.sort((a,b) => {
-                // Set 0 at the end
-                if (parseInt(a[this.pg.currentSort]) == 0) return 1;
-                if (parseInt(b[this.pg.currentSort]) == 0) return -1;
+                // Set zero 0 at the end
+                // if (parseInt(a[this.pg.currentSort]) == 0) return 1;
+                // if (parseInt(b[this.pg.currentSort]) == 0) return -1;
 
                 // Comapre integer values
                 if (a[this.pg.currentSort] === parseInt(a[this.pg.currentSort], 10) ||

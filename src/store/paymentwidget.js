@@ -21,6 +21,7 @@ const paymentwidget = {
                 name: "faucet",
                 min: 500,
                 max: 25000,
+                steps: 500,
             },
             payment_types: [
                 { name: 'civisepa', title: 'paymentwidget.paymenttype.sepa', default: true, },
