@@ -1,5 +1,8 @@
 <template>
     <div>
+        <vca-field :label="$t('paymentwidget.insert.label.url')">
+            <vca-share-buttons v-if="current" :share="share"/>
+        </vca-field>
         <vca-field :label="$t('paymentwidget.insert.label.infos')">
             <vca-number
                 ref="crm_id"
@@ -63,6 +66,9 @@
             <vca-card>
                 <vca-money-input class="input-amount" ref="slider_max" v-model="slider_max" :money="slider_max" :rules="$v.current.slider_max" :errorMsg="$t('paymentwidget.insert.errorMsg.slider_max')" :topText="$t('paymentwidget.insert.topText.slider_max')"/>
             </vca-card>
+            <vca-card>
+                <vca-money-input class="input-amount" ref="slider_steps" v-model="slider_steps" :money="slider_steps" :rules="$v.current.slider_steps" :errorMsg="$t('paymentwidget.insert.errorMsg.slider_steps')" :topText="$t('paymentwidget.insert.topText.slider_steps')"/>
+            </vca-card>
         </vca-field>
 
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.update') }}</button>
@@ -84,6 +90,14 @@ export default {
         return {}
     },
     computed: {
+        share() {
+            let idUrl = this.current ? this.current.id : ""
+            return {
+                url: idUrl,
+                text: this.$t('team.invite'),
+                media: ["clipboard"]
+            }
+        },
         current: {
             get () {
                 return this.$store.state.paymentwidget.current
@@ -116,6 +130,15 @@ export default {
             },
             set (value) {
                 this.current.slider.min = Number.parseInt(value.amount)
+                this.$store.commit('paymentwidget/current', this.current)
+            }
+        },
+        slider_steps: {
+            get () {
+                return {'amount': this.$store.state.paymentwidget.current.slider.steps, 'currency': 'EUR'}
+            },
+            set (value) {
+                this.current.slider.steps = Number.parseInt(value.amount)
                 this.$store.commit('paymentwidget/current', this.current)
             }
         },
