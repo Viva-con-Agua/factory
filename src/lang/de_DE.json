@@ -72,7 +72,7 @@
     "tabs": {
       "home": "Übersicht",
       "apps": "Anwendungen",
-      "paymentWidget": "Formulare",
+      "paymentwidget": "Formulare",
       "company": "Unternehmen",
       "email": "E-Mails",
       "campaign": "Events",
@@ -240,6 +240,18 @@
         "subtitle": "Einzug via Paypal"
       }
     },
+    "slider": {
+      "faucet": {
+        "title": "Wasserhahn",
+        "subtitle": "und sich füllender Becher",
+        "label": "Wasserhahn mit Becher"
+      },
+      "cups": {
+        "title": "Becher-Reihe",
+        "subtitle": "mit sich füllenden Bechern",
+        "label": "Becher-Reihe"
+      }
+    },
     "list": {
       "label": "Angelegte Formulare",
       "description": "Hier werden alle bisher angelegten Spenden- und Mitgliedsformulare angezeigt.",
@@ -248,8 +260,10 @@
       "name": "Name",
       "description": "Beschreibung",
       "default_amount": "Standardbetrag",
-      "min_amount": "Mindestbetrag",
-      "search": "Nach einem Formular suchen"
+      "min_amount": "min. Betrag",
+      "slider_min": "Slider von",
+      "slider_max": "bis",
+      "slider_steps": "Schitte"
     },
     "popup": {
       "edit": "Event \"{0}\" bearbeiten"
@@ -257,7 +271,13 @@
     "insert": {
       "topText": {
         "min_amount": "Mindestbetrag",
-        "default_amount": "Standardbetrag"
+        "default_amount": "Standardbetrag",
+        "slider_steps": "Schritte",
+        "slider_min": "Startbetrag",
+        "slider_max": "Endbetrag"
+      },
+      "title": {
+        "slider_types": "Art des Reglers"
       },
       "placeholder": {
         "crm_id": "ID der Kampagne im CRM",
@@ -268,11 +288,18 @@
         "pay_day": "Tag des Zahlungseinzugs",
         "company_id": "UUD des verknüpften Unternehmens",
         "default_amount": "Standardbetrag",
+        "slider_types": "Art des Reglers",
         "min_amount": "Mindestbetrag"
       },
       "label": {
+        "infos": "Informationen über das Formular",
+        "url": "ID für die Einbettung",
+        "payments": "Zahlungseinstellungen",
+        "slider_types": "Slider",
+        "infos": "Informationen über das Formular",
         "payment_types": "Zahlungsarten für Einmalspende",
-        "subscription_types": "Zahlungsarten für Dauerspende"
+        "subscription_types": "Zahlungsarten für Dauerspende",
+        "slider": "Slider-Einstellungen"
       },
       "error": {
         "crm_id": "Bitte gib eine Kampagnen ID an",
@@ -280,6 +307,7 @@
         "title": "Bitte gib einen Titel ein",
         "description": "Bitte gib einen Text ein",
         "start_time": "Bitte gib ein Startdatum an",
+        "company_id": "Bitte gib ein Company Id an",
         "end_time": "Bitte gib ein Enddatum an",
         "type": "Bitte gib die Art des Events an"
       },

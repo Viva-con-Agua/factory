@@ -11,8 +11,7 @@ namespaced: true,
 
     },
     state: () => ({
-        current: null,
-        profile: null
+        current: null
     }),
     mutations: { 
         login(state, value) {
