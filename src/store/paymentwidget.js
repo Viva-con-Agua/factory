@@ -51,7 +51,9 @@ const paymentwidget = {
         ],
         slider_types: [
             { name: 'faucet', title: 'paymentwidget.slider.faucet.title', default: true, subtitle: 'paymentwidget.slider.faucet.subtitle', label: 'paymentwidget.slider.faucet.label', value: 'faucet' },
-            { name: 'cups', title: 'paymentwidget.slider.cups.title', default: true, subtitle: 'paymentwidget.slider.cups.subtitle', label: 'paymentwidget.slider.cups.label', value: 'cups' }
+            { name: 'cups', title: 'paymentwidget.slider.cups.title', default: true, subtitle: 'paymentwidget.slider.cups.subtitle', label: 'paymentwidget.slider.cups.label', value: 'cups' },
+            { name: 'faucetbells', title: 'paymentwidget.slider.faucetbells.title', default: true, subtitle: 'paymentwidget.slider.faucetbells.subtitle', label: 'paymentwidget.slider.faucetbells.label', value: 'faucetbells' },
+            { name: 'mulled', title: 'paymentwidget.slider.mulled.title', default: true, subtitle: 'paymentwidget.slider.mulled.subtitle', label: 'paymentwidget.slider.mulled.label', value: 'mulled' }
         ]
     }),
 
