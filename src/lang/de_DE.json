@@ -250,6 +250,16 @@
         "title": "Becher-Reihe",
         "subtitle": "mit sich füllenden Bechern",
         "label": "Becher-Reihe"
+      },
+      "mulled": {
+        "title": "Glühwein-Glas",
+        "subtitle": "mit Slider mit Weihnachtsmütze (weihnachtlich)",
+        "label": "Glühwein-Glas"
+      },
+      "faucetbells": {
+        "title": "Wasserhahn",
+        "subtitle": "mit Slider als Glocken und sich füllender Becher (weihnachtlich)",
+        "label": "Wasserhahn (W)"
       }
     },
     "list": {
