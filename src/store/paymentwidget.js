@@ -52,6 +52,11 @@ const paymentwidget = {
         slider_types: [
             { name: 'faucet', title: 'paymentwidget.slider.faucet.title', default: true, subtitle: 'paymentwidget.slider.faucet.subtitle', label: 'paymentwidget.slider.faucet.label', value: 'faucet' },
             { name: 'cups', title: 'paymentwidget.slider.cups.title', default: true, subtitle: 'paymentwidget.slider.cups.subtitle', label: 'paymentwidget.slider.cups.label', value: 'cups' },
+            { name: 'wwd', title: 'paymentwidget.slider.wwd.title', default: true, subtitle: 'paymentwidget.slider.wwd.subtitle', label: 'paymentwidget.slider.wwd.label', value: 'wwd' },
+            { name: 'mhd', title: 'paymentwidget.slider.mhd.title', default: true, subtitle: 'paymentwidget.slider.mhd.subtitle', label: 'paymentwidget.slider.mhd.label', value: 'mhd' },
+            { name: 'easter', title: 'paymentwidget.slider.easter.title', default: true, subtitle: 'paymentwidget.slider.easter.subtitle', label: 'paymentwidget.slider.easter.label', value: 'easter' },
+            { name: 'run4water', title: 'paymentwidget.slider.run4water.title', default: true, subtitle: 'paymentwidget.slider.run4water.subtitle', label: 'paymentwidget.slider.run4water.label', value: 'run4water' },
+            { name: 'valentine', title: 'paymentwidget.slider.valentine.title', default: true, subtitle: 'paymentwidget.slider.valentine.subtitle', label: 'paymentwidget.slider.valentine.label', value: 'valentine' },
             { name: 'faucetbells', title: 'paymentwidget.slider.faucetbells.title', default: true, subtitle: 'paymentwidget.slider.faucetbells.subtitle', label: 'paymentwidget.slider.faucetbells.label', value: 'faucetbells' },
             { name: 'mulled', title: 'paymentwidget.slider.mulled.title', default: true, subtitle: 'paymentwidget.slider.mulled.subtitle', label: 'paymentwidget.slider.mulled.label', value: 'mulled' }
         ]
