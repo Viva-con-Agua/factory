@@ -246,6 +246,31 @@
         "subtitle": "und sich füllender Becher",
         "label": "Wasserhahn mit Becher"
       },
+      "mhd": {
+        "title": "Wasserhahn (MHD)",
+        "subtitle": "und Tropfen-Slider in Rot mit Blume",
+        "label": "Wasserhahn (MHD)"
+      },
+      "wwd": {
+        "title": "Wasserhahn (WWD)",
+        "subtitle": "und Slider mit Schild 'Wasser für alle'",
+        "label": "Wasserhahn (WWD)"
+      },
+      "easter": {
+        "title": "Wasserhahn (Ostern)",
+        "subtitle": "und Tropfen-Slider in Oster-Ei Farben",
+        "label": "Wasserhahn (Ostern)"
+      },
+      "valentine": {
+        "title": "Wasserhahn (Valentinstag)",
+        "subtitle": "und Tropfen-Slider mit Herz",
+        "label": "Wasserhahn (Valentinstag)"
+      },
+      "run4water": {
+        "title": "Wasserhahn (Run4Water)",
+        "subtitle": "und Tropfen-Slider mit Laufschuhen",
+        "label": "Wasserhahn (Run4Water)"
+      },
       "cups": {
         "title": "Becher-Reihe",
         "subtitle": "mit sich füllenden Bechern",
@@ -253,13 +278,13 @@
       },
       "mulled": {
         "title": "Glühwein-Glas",
-        "subtitle": "mit Slider mit Weihnachtsmütze (weihnachtlich)",
+        "subtitle": "mit Tropfen-Slider mit Weihnachtsmütze (weihnachtlich)",
         "label": "Glühwein-Glas"
       },
       "faucetbells": {
-        "title": "Wasserhahn",
+        "title": "Wasserhahn (Weihnachten)",
         "subtitle": "mit Slider als Glocken und sich füllender Becher (weihnachtlich)",
-        "label": "Wasserhahn (W)"
+        "label": "Wasserhahn (Weihnachten)"
       }
     },
     "list": {
