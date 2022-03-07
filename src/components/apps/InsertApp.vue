@@ -2,31 +2,54 @@
     <div>
         <vca-input
             ref="app_name"
-            errorMsg="Bitte app name angeben"
-            placeholder="App Name"
+            :errorMsg="$t('app.insert.error.name')"
+            :placeholder="$t('app.insert.placeholder.name')"
             v-model.trim="create.app_name"
             :rules="$v.create.app_name">
         </vca-input>
         <vca-input
             ref="redirect_url"
-            errorMsg="Bitte RedirectUrl angeben"
-            placeholder="Redirect Url"
+            :errorMsg="$t('app.insert.error.redirect_url')"
+            :placeholder="$t('app.insert.placeholder.redirect_url')"
             v-model.trim="create.redirect_url"
             :rules="$v.create.redirect_url">
         </vca-input>
         <vca-input
             ref="logout_url"
-            errorMsg="Bitte Logout Url angeben"
-            placeholder="LogoutUrl"
+            :errorMsg="$t('app.insert.error.logout_url')"
+            :placeholder="$t('app.insert.placeholder.logout_url')"
             v-model.trim="create.logout_url"
             :rules="$v.create.logout_url">
         </vca-input>
-        <input type="checkbox" id="admin" value="admin" v-model="create.restriction">
-        <label for="admin">Admin</label>
-        <input type="checkbox" id="employee" value="employee" v-model="create.restriction">
-        <label for="employee">Employee</label>
-        <input type="checkbox" id="member" value="member" v-model="create.restriction">
-        <label for="member">Member</label>
+
+        <div class="vca-row">
+            <div>{{ $t('app.insert.placeholder.permissions.title') }}</div>
+            <div class="vca-column">
+
+                <vca-checkbox
+                    id="admin"
+                    value="admin"
+                    v-model="create.restriction">
+                    {{ $t('app.insert.placeholder.permissions.admin') }}
+                </vca-checkbox>
+                <vca-checkbox
+                    id="employee"
+                    value="employee"
+                    v-model="create.restriction">
+                    {{ $t('app.insert.placeholder.permissions.employee') }}
+                </vca-checkbox>
+                <vca-checkbox
+                    id="member"
+                    value="member"
+                    v-model="create.restriction">
+                    {{ $t('app.insert.placeholder.permissions.member') }}
+                </vca-checkbox>
+                
+            </div>
+              
+            
+        </div>
+
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.create') }}</button>
     </div>
 </template>

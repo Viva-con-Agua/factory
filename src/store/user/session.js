@@ -1,15 +1,11 @@
-import api from './api.js'
+import api from '../api.js'
 //import createPersistedState from "vuex-persistedstate";
 const session = {
     namespaced: true,
     state: () => ({
-        user: null,
         error: ""
     }),
     mutations: {
-        user (state, value) {
-            state.user = value
-        },
         error (state, value) {
             state.error = value
         },
@@ -18,16 +14,14 @@ const session = {
         }
     },
     getters: {
-        user(state) {
-            return state.user
-        },
         session() {
-            if (localStorage.getItem("access") === null ) {
+            if (JSON.parse(localStorage.getItem("access")) === null ) {
                 return false
             } else {
                 return true
             }
         }
+
     },
     actions:{
         loadSession ({commit}){
@@ -47,48 +41,44 @@ const session = {
                 }
             })
         },
-        setItem (key, value) {
-            return Promise.resolve().then(function () {
-                localStorage.setItem(key, value);
-            });
-        },
-        getItem (key) {
-            return Promise.resolve().then(function () {
-                return localStorage.getItem(key);
-            });
-        },
-
         get({commit}, code) {
             return new Promise((resolve, reject) => {
                 api.call.get('/v1/auth/login/token?code=' + code.code)
                     .then(response => {
-                        localStorage.setItem('access', response.data.access_token)
-                        localStorage.setItem('refresh', response.data.refresh_token)
+                        api.storeJWT("access", response.data.access_token)
+                        api.storeJWT("refresh", response.data.refresh_token)
                         var user = api.parseJwt(response.data.access_token).user
-                        commit("user", user)
-                        resolve()
-                    })
+                        console.log(user)
+                        commit("user/login", user, {root: true})
+                        resolve("fine")
+                      })
                     .catch(error => {
                         commit('error', error)
-                        commit('logout')
+                        //commit('logout')
                         reject()
                     })
             })
 
         },
-        test({commit}) {
+        refresh({commit}) {
             return new Promise((resolve, reject) => {
-                api.call.get('/restricted')
+                api.call.get('/v1/auth/refresh')
                     .then(response => {
-                        commit('test', response.data), 
-                            resolve()
-                    })
+                        api.storeJWT("access", response.data.access_token)
+                        api.storeJWT("refresh", response.data.refresh_token)
+                        var user = api.parseJwt(response.data.access_token).user
+                        commit("user/login", user, {root: true})
+                        resolve("fine")
+                      })
                     .catch(error => {
                         commit('error', error)
+                        //commit('logout')
                         reject()
                     })
             })
+
         }
+        
     }
 }
 export default session

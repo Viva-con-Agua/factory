@@ -1,10 +1,23 @@
 <template>
-    <vca-card class="content-text">
-        <h2>{{ $t('page.campaign') }}</h2>
-        <InsertCampaign/>
-        <ListCampaign />
-        <UpdateCampaign v-if="current!=null"/>
-    </vca-card>
+    <div class="content-text">
+        <vca-card>
+            <h2>{{ $t('page.campaign') }}</h2>
+            <vca-accordion :header="$t('events.title.insert')">
+                <div slot="body">
+                    <InsertCampaign/>
+                </div>
+            </vca-accordion>
+            <vca-accordion :header="$t('events.title.list')">
+                <div slot="body">
+                    <ListCampaign />
+                    
+                    <vca-popup v-if="current!=null" :show="current!=null" :title="$t('events.popup.edit', {0: current.name})" @close="setCurrent()">
+                        <UpdateCampaign />
+                    </vca-popup>
+                </div>
+            </vca-accordion>
+        </vca-card>
+    </div>
 </template>
 <script>
 import InsertCampaign from '@/components/campaign/InsertCampaign'
@@ -25,6 +38,11 @@ export default {
     },
     created () {
         this.$store.dispatch({ type: "campaign/list"})
+    },
+    methods: {
+        setCurrent() {
+            this.$store.commit("campaign/current", null)
+        }
     }
 }
 

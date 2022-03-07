@@ -1,44 +1,30 @@
 import api from './api.js'
 import pagination from './pagination.js'
-import job from './job.js'
 
-const mail = {
+const company = {
     namespaced: true,
     modules: {
-        job: job,
         pg: pagination
     },
     state: () => ({
-        list: null,
         current: null,
         create: {
-            email: null,
-            password: null,
-            host: null,
-            port: 25,
-            scope: []
-        }
+            name: "",
+            country: "",
+            stripe_public_key: "",
+            stripe_private_key:"",
+            paypal_client_id:"",
+            paypal_secret: ""
+        },
     }),
-    mutations: {
-        list(state, value) {
-            state.list = value
-        },
-        current(state, value) {
-            state.current = value
-        },
-        create(state, value) {
-            state.create = value
-        }
-    },
     getters: {
-        list(state) {
-            return state.list
-        },
         current(state) {
             return state.current
-        },
-        create(state) {
-            return state.create
+        }
+    },
+    mutations: {
+        current(state, value) {
+            state.current = value
         }
     },
     actions: {
@@ -52,7 +38,16 @@ const mail = {
         },
         create({commit, state}) {
             return new Promise((resolve, reject) => {
-               api.call.post('/admin/email/email', state.create)
+               api.call.post('/v1/donations/company', state.create)
+                    .then((response) => {commit('current', response.data.payload), resolve()})
+                    .catch(error => {
+                        reject(error)
+                    })
+            }) 
+        },
+        updateReq({commit, state}) {
+            return new Promise((resolve, reject) => {
+               api.call.put('/v1/donations/company', state.current)
                     .then((response) => {commit('current', response.data.payload), resolve()})
                     .catch(error => {
                         reject(error)
@@ -61,7 +56,7 @@ const mail = {
         },
         list({commit}) {
             return new Promise((resolve, reject) => {
-                api.call.get('/admin/email/email')
+                api.call.get('/v1/donations/company')
                     .then((response) => {commit('list', response.data.payload), resolve()})
                     .catch((error) => {
                         reject(error)
@@ -69,6 +64,7 @@ const mail = {
             })
         }
     }
-}
-export default mail
 
+}
+
+export default company

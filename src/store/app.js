@@ -1,7 +1,12 @@
 import api from './api.js'
+import pagination from './pagination.js'
+import msg from './messages.js'
 
 const app = {
-
+    modules: {
+        pg: pagination,
+        msg: msg
+    },
     namespaced: true,
     state: () => ({
         list: null,
@@ -41,12 +46,15 @@ const app = {
             await dispatch({type: 'updateReq'})
             await dispatch({type: 'list'})
         },
-
         create({commit, state}) {
             return new Promise((resolve, reject) => {
                api.call.post('/v1/apps', state.create)
-                    .then((response) => {commit('current', response.data.payload), resolve()})
+                    .then(() => {
+                        commit('currentMsg', state.msg.app.success.created, {root: true}),
+                        resolve()
+                    })
                     .catch(error => {
+                        commit('currentMsg', state.msg.app.error.created, {root: true}),
                         reject(error)
                     })
             }) 
@@ -54,8 +62,13 @@ const app = {
         updateReq({commit, state}) {
             return new Promise((resolve, reject) => {
                api.call.put('/v1/apps', state.current)
-                    .then((response) => {commit('current', response.data.payload), resolve()})
+                    .then(() => {
+                        commit('current', null), 
+                        commit('currentMsg', state.msg.app.success.updated, {root: true}),
+                        resolve()
+                    })
                     .catch(error => {
+                        commit('currentMsg', state.msg.app.error.updated, {root: true}),
                         reject(error)
                     })
             }) 

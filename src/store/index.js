@@ -1,26 +1,63 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import app from './app.js'
-import session from './session.js'
-import mail from './mail.js'
-import campaign from './campaign.js'
-import navigation from './navigation.js'
-import paymentwidget from './paymentwidget.js'
+import app from './app'
+import user from './user'
+import mail from './mail'
+import campaign from './campaign'
+import navigation from './navigation'
+import paymentwidget from './paymentwidget'
+import company from './company'
 Vue.use(Vuex)
 export default new Vuex.Store({
     modules: {
         //namespaced: true,
         app: app,
-        session: session,
+        user: user,
+        company: company,
         mail: mail,
         campaign: campaign,
         navigation: navigation,
         paymentwidget: paymentwidget,
     },
-    actions:{
+    state: {
+        loading: false,
+        currentMsg: null
+    },
+    mutations: {
+        currentMsg (state, value) {
+            state.currentMsg = value
+        },
+        loadingFlow(state) {
+            state.loading = !state.loading
+        }
+    },
+    getters: {
+        session(state) {
+            if ( state.user.current !== null ) {
+                return true
+            } 
+            return false
+        },
+        currentMsg (state) {
+            return state.currentMsg
+        },
+        loadingFlow (state) {
+            return state.loading
+        }
+    },
+    actions: {
+        async mailView({dispatch}) {
+            await dispatch('mail/job/list')
+        },
         async payment_widget_page ({dispatch}) {
             await dispatch({type: 'paymentwidget/list'})
         },
-        
+        async companyView ({dispatch}) {
+            await dispatch({type: 'company/list'})
+        },
+        logout({commit}) {
+            //dispatch('user/signout')
+            commit('user/session/logout')  
+        }
     }
 })

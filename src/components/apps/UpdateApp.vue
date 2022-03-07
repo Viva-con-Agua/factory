@@ -21,15 +21,43 @@
             v-model.trim="current.logout_url"
             :rules="$v.current.logout_url">
         </vca-input>
-        <input type="checkbox" id="admin" value="admin" v-model="current.restriction">
-        <label for="admin">Admin</label>
-        <input type="checkbox" id="employee" value="employee" v-model="current.restriction">
-        <label for="employee">Employee</label>
-        <input type="checkbox" id="member" value="member" v-model="current.restriction">
-        <label for="member">Member</label>
+        
+        <div class="vca-row">
+            <div>{{ $t('app.insert.placeholder.permissions.title') }}</div>
+            <div class="vca-column">
+
+                <vca-checkbox
+                    id="admin"
+                    value="admin"
+                    v-model="current.restriction">
+                    {{ $t('app.insert.placeholder.permissions.admin') }}
+                </vca-checkbox>
+                <vca-checkbox
+                    id="employee"
+                    value="employee"
+                    v-model="current.restriction">
+                    {{ $t('app.insert.placeholder.permissions.employee') }}
+                </vca-checkbox>
+                <vca-checkbox
+                    id="member"
+                    value="member"
+                    v-model="current.restriction">
+                    {{ $t('app.insert.placeholder.permissions.member') }}
+                </vca-checkbox>
+                
+            </div>
+              
+            
+        </div>
 
         <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.update') }}</button>
-        <vca-cancel-button class="vca-center" :placeholder="$t('actions.close')" @cancel="close"/>
+        <div class="vca-center">
+            <vca-cancel-button :placeholder="$t('actions.close')" @click="resetCurrent" />
+        </div>
+
+
+
+
     </div>
 </template>
 <script>
@@ -63,7 +91,7 @@ export default {
                 this.submit()
             }
         },
-        close() {
+        resetCurrent() {
             this.$store.commit('app/current', null)
         },
         submit() {
