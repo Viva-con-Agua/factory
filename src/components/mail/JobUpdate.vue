@@ -94,7 +94,7 @@
 
             </vca-card>
 
-            <button class="vca-button" @click.self.prevent="validate">{{ $t('actions.update') }}</button>
+            <button class="vca-button" @click.self.prevent="save">{{ $t('actions.update') }}</button>
 
             <div class="vca-center">
                 <vca-cancel-button :placeholder="$t('actions.close')" @click="resetCurrent" />

@@ -97,8 +97,7 @@ router.beforeEach(( to, from, next ) => {
             if (!to.meta.requiresAuth) {
                 next()
             }else{
-                next()
-                //window.location = process.env.VUE_APP_AUTH_URL + "login?scope=" + process.env.VUE_APP_SCOPE + "&language=" + localStorage.language + "&callback=" + btoa(to.fullPath)
+                window.location = process.env.VUE_APP_AUTH_URL + "login?scope=" + process.env.VUE_APP_SCOPE + "&language=" + localStorage.language + "&callback=" + btoa(to.fullPath)
             }
         })
 })

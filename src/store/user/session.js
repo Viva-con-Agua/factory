@@ -54,8 +54,6 @@ const session = {
                       })
                     .catch(error => {
                         commit('error', error)
-                                                console.log(error)
-
                         //commit('logout')
                         reject()
                     })
@@ -66,7 +64,6 @@ const session = {
             return new Promise((resolve, reject) => {
                 api.call.get('/v1/auth/refresh')
                     .then(response => {
-                        console.log("JERE")
                         api.storeJWT("access", response.data.access_token)
                         api.storeJWT("refresh", response.data.refresh_token)
                         var user = api.parseJwt(response.data.access_token).user

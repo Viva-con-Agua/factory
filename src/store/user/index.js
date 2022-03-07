@@ -8,7 +8,6 @@ namespaced: true,
     modules: {
         session: session,
         profile: profile
-
     },
     state: () => ({
         current: null
