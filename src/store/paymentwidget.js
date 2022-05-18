@@ -58,7 +58,8 @@ const paymentwidget = {
             { name: 'run4water', title: 'paymentwidget.slider.run4water.title', default: true, subtitle: 'paymentwidget.slider.run4water.subtitle', label: 'paymentwidget.slider.run4water.label', value: 'run4water' },
             { name: 'valentine', title: 'paymentwidget.slider.valentine.title', default: true, subtitle: 'paymentwidget.slider.valentine.subtitle', label: 'paymentwidget.slider.valentine.label', value: 'valentine' },
             { name: 'faucetbells', title: 'paymentwidget.slider.faucetbells.title', default: true, subtitle: 'paymentwidget.slider.faucetbells.subtitle', label: 'paymentwidget.slider.faucetbells.label', value: 'faucetbells' },
-            { name: 'mulled', title: 'paymentwidget.slider.mulled.title', default: true, subtitle: 'paymentwidget.slider.mulled.subtitle', label: 'paymentwidget.slider.mulled.label', value: 'mulled' }
+            { name: 'mulled', title: 'paymentwidget.slider.mulled.title', default: true, subtitle: 'paymentwidget.slider.mulled.subtitle', label: 'paymentwidget.slider.mulled.label', value: 'mulled' },
+            { name: 'skull', title: 'paymentwidget.slider.skull.title', default: true, subtitle: 'paymentwidget.slider.skull.subtitle', label: 'paymentwidget.slider.skull.label', value: 'skull' }
         ]
     }),
 
