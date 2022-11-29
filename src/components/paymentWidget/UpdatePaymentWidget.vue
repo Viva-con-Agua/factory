@@ -59,7 +59,6 @@
 
         <vca-field :label="$t('paymentwidget.insert.label.slider')">
             <vca-dropdown ref="type" v-model="slider_type" :options="slider_types" :title="$t('paymentwidget.insert.title.slider_types')" :placeholder="$t('paymentwidget.insert.placeholder.slider_types')" :label="$t('paymentwidget.insert.label.slider_types')"/>
-            
             <vca-card>
                 <vca-money-input class="input-amount" ref="slider_min" v-model="slider_min" :money="slider_min" :rules="$v.current.slider_min" :errorMsg="$t('paymentwidget.insert.errorMsg.slider_min')" :topText="$t('paymentwidget.insert.topText.slider_min')"/>
             </vca-card>
@@ -68,6 +67,9 @@
             </vca-card>
             <vca-card>
                 <vca-money-input class="input-amount" ref="slider_steps" v-model="slider_steps" :money="slider_steps" :rules="$v.current.slider_steps" :errorMsg="$t('paymentwidget.insert.errorMsg.slider_steps')" :topText="$t('paymentwidget.insert.topText.slider_steps')"/>
+            </vca-card>
+            <vca-card>
+                <vca-money-input class="input-amount" ref="top_amount" v-model="top_amount" :money="top_amount" />
             </vca-card>
         </vca-field>
 
@@ -148,6 +150,15 @@ export default {
             },
             set (value) {
                 this.current.slider.max = Number.parseInt(value.amount)
+                this.$store.commit('paymentwidget/current', this.current)
+            }
+        },
+        top_amount: {
+            get () {
+                return {'amount': this.$store.state.paymentwidget.current.top_amount, 'currency': 'EUR'}
+            },
+            set (value) {
+                this.currency.top_amount = Number.parseInt(value.amount)
                 this.$store.commit('paymentwidget/current', this.current)
             }
         },
