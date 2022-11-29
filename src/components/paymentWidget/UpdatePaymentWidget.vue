@@ -158,7 +158,7 @@ export default {
                 return {'amount': this.$store.state.paymentwidget.current.top_amount, 'currency': 'EUR'}
             },
             set (value) {
-                this.currency.top_amount = Number.parseInt(value.amount)
+                this.current.top_amount = Number.parseInt(value.amount)
                 this.$store.commit('paymentwidget/current', this.current)
             }
         },
